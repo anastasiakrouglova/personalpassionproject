@@ -3,7 +3,7 @@
 <template>
   <div class="stretch">
     <router-link @click="stop()" class="arrowback" to="/"><ArrowBackIcon class="arrowback" w="30" h="30" /></router-link>
-    <h1>Workout {{ $route.params.id }}</h1>
+    <h1> {{ $route.params.id }}</h1>
     <div class="column">
       <span @click="play()"><PlayIcon class="play-control-item" v-show="!isPlaying" w="30" h="30"/></span>
       <span @click="play()"><PauseIcon class="play-control-item" v-show="isPlaying" w="30" h="30"/></span>

@@ -1,9 +1,22 @@
 <template >
-    <div >
-        <li v-for='workout in workouts' :key="workout.id">
-            <router-link type="type" v-bind:to="'/detail/' + workout.id">{{workout.title}}</router-link>
-        </li>
+    <div>
+        <div v-if="this.$route.path === '/'">
+            <li v-for='workout in onlyJumps' :key="workout.id">
+                <router-link type="type" v-bind:to="'/detail/' + workout.id">{{workout.title}}</router-link>
+            </li>
+        </div>
+        <div v-if="this.$route.path === '/workout'">
+            <li v-for='workout in onlyWorkouts' :key="workout.id">
+                <router-link type="type" v-bind:to="'/detail/' + workout.id">{{workout.title}}</router-link>
+            </li>
+        </div>
+        <div v-if="this.$route.path === '/stretch'">
+            <li v-for='workout in onlyStretch' :key="workout.id">
+                <router-link type="type" v-bind:to="'/detail/' + workout.id">{{workout.title}}</router-link>
+            </li>
+        </div>
     </div>
+    
 </template>
 
 
@@ -11,7 +24,7 @@
 export default {
   props: {
     type: String,
-    title: String
+    title: String,
   }, 
   data () {
     return {
@@ -26,10 +39,19 @@ export default {
     }
   },
   computed: {
-    jumps: function () {
-        return this.workouts.filter(function (jump) {
-        console.log(this.workouts.type)
-        return this.workouts.type === 'jump'
+    onlyJumps() {
+        return this.workouts.filter(jump => {
+            return jump.type === 'jump'
+        })
+    },
+    onlyWorkouts() {
+        return this.workouts.filter(workout => {
+            return workout.type === 'workout'
+        })
+    },
+    onlyStretch() {
+        return this.workouts.filter(stretch => {
+            return stretch.type === 'stretch'
         })
     }
   }

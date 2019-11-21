@@ -1,18 +1,21 @@
 <template>
   <div class="stretch">
     <Navigation />
-    <h1>Stretch</h1>
+    <SingleWorkout msg="Stretch" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import SingleWorkout from "@/components/SingleWorkout.vue";
 import Navigation from "@/views/Navigation.vue";
 
 export default {
-  name: "stretch",
+  name: "Stretch",
   components: {
+    SingleWorkout,
     Navigation
-  }
+  },
+
 };
 </script>
