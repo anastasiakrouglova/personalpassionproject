@@ -1,24 +1,26 @@
+
+
 <template>
   <div class="stretch">
+    <router-link @click="stop()" class="arrowback" to="/"><ArrowBackIcon class="arrowback" w="30" h="30" /></router-link>
     <h1>Workout {{ $route.params.id }}</h1>
-    <audio src="../assets/audio/chameleon.mp3">audio</audio>
-    <p>{{title}}</p>
     <div class="column">
       <span @click="play()"><PlayIcon class="play-control-item" v-show="!isPlaying" w="30" h="30"/></span>
-      <span @click="play()"><PauseIcon class="play-control-item" v-show="isPlaying" w="30" h="30" @click="play()"/></span>
+      <span @click="play()"><PauseIcon class="play-control-item" v-show="isPlaying" w="30" h="30"/></span>
     </div>
   </div>
 </template>
 
 
 <script>
+import ArrowBackIcon from 'vue-ionicons/dist/md-arrow-back'
 import PlayIcon from 'vue-ionicons/dist/md-play'
 import PauseIcon from 'vue-ionicons/dist/md-pause'
 
 export default {
   name:'App',
   components: {
-    PlayIcon, PauseIcon
+    PlayIcon, PauseIcon, ArrowBackIcon
   },
   data () {
     return {
@@ -66,7 +68,6 @@ export default {
         this.countCheck = 0;
         this.lastRecordedTrackTime = -1;
         this.timeBufferMins = 0;
-        this.viewShit()
     },
     play (songId = this.presentSongId, type = '') {
         if (this.isPlaying && !this.isPaused) {
@@ -102,6 +103,17 @@ export default {
         this.lastRecordedTrackTime = -1;
         this.timeBufferMins = 0;
     },
+    stop(songId = this.presentSongId, type = '') {
+      this.audio.pause();
+    }
   }
 }
 </script>
+
+
+<style>
+.arrowback {
+ display: flex;
+ margin: 1rem;
+}
+</style>

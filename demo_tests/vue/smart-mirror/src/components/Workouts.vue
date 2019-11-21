@@ -1,21 +1,29 @@
-<template>
-  <div class="hello">
+<template >
+  <div>
     <h1>{{ msg }}</h1>
-    <ul>
-      <li><router-link to="/detail/1">Workout 1</router-link></li>
-      <li><router-link to="/detail/2">Workout 2</router-link></li>
-      <li><router-link to="/detail/3">Workout 3</router-link></li>
-      <li><router-link to="/detail/4">Workout 4</router-link></li>
+    <ul id="workout">
+      <singleWorkout type="jump"/>
+      <!-- <li><router-link type="jump" to="/detail/2">Jump 2</router-link></li>
+      <button v-on:click="count++">You clicked me {{ count }} times.</button>
+      <li><router-link type="stretch" to="/detail/3">Stretch 3</router-link></li>
+      <li><router-link type="workout" to="/detail/4">Workout 4</router-link></li> -->
     </ul>
   </div>
 </template>
 
 <script>
+import SingleWorkout from "@/components/SingleWorkout.vue";
+
 export default {
-  name: "HelloWorld",
+  name: "workout-data",
+  components: {
+    SingleWorkout
+  },
   props: {
-    msg: String
-  }
+    msg: String,
+    type: String,
+    title: String
+  }, 
 };
 </script>
 

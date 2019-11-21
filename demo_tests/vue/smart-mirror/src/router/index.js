@@ -1,14 +1,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Jumps from "../views/Jumps.vue";
+import Jump from "../views/Jump.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "jumps",
-    component: Jumps
+    name: "jump",
+    component: Jump
   },
   {
     path: "/workout",
