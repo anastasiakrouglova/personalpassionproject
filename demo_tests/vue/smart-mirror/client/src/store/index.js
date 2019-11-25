@@ -1,21 +1,59 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import VuePageTransition from 'vue-page-transition'
+//import VuePageTransition from 'vue-page-transition'
 //import VueSocketIO from 'vue-socket.io'
+import axios from "axios";
 
-Vue.use(Vuex);
-Vue.use(VuePageTransition);
+Vue.use(Vuex, axios);
+//Vue.use(VuePageTransition);
+
+//const url = 'http://localhost:3000/api/posts'
 
 // Vue.use(new VueSocketIO({
 //   debug: true,
-//   connection: 'http://192.168.151.86:8081/',
-//   options: { path: "/my-app/" } //Optional options
+//   connection: 'http://localhost:3000/',
+//   //options: { path: "/my-app/" } //Optional options
 // }))
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
+  state: {
+        posts: [],
+        workouts: [
+          { id: 1, title: 'Sterkere landing', type:'jump', time:'13min' },
+          { id: 2, title: 'Hoogte in sprongen', type:'jump', time:'10min' },
+          { id: 3, title: 'Gecontroleerd bovenlichaam', type:'jump', time:'7min' },
+          { id: 4, title: 'Springcoordinatie', type:'jump', time:'24min' },
+          { id: 5, title: 'Stabielere zweefpirouette', type:'pirouette', time:'12min' },
+          { id: 6, title: 'Sterkere zitpirouette', type:'pirouette', time:'16min' },
+          { id: 7, title: 'Billmann', type:'stretch', time:'14min' },
+          { id: 8, title: 'Been in de lucht', type: 'stretch', time: '2min' },
+          { id: 9, title: 'Kanon', type: 'stretch', time: '2min' },
+          { id: 10, title: 'Been pakken', type:'stretch', time:'2min' },
+        ],
+  },
+  mutations: {
+    SET_POSTS(state, posts) {
+      state.posts = posts;
+    }
+  },
+  actions: {
+    //methods
+    playVideo(videoID) {
+      store.data.posts.push(videoID);
+    },
+    loadPosts({ commit }) {
+      axios
+        .get('http://localhost:3000/api/posts')
+        .then(data => {
+          console.log(data.data)
+          let posts = data.data
+          commit('SET_POSTS', posts)
+        })
+        .catch(error => {
+          console.log('aiiii er liep iets mis')
+        })
+    }
+  },
   modules: {},
   // actionPrefix: 'SOCKET_',
   // mutationPrefix: 'SOCKET_'
