@@ -3,38 +3,39 @@ const mongodb = require('mongodb');
 
 const router = express.Router();
 
-// GET POSTS
+// GET WORKOUTS
 router.get('/', async (req, res) => {
-    const posts = await loadPostsCollection();
-    res.send(await posts.find({}).toArray());
+    const workouts = await loadWorkoutsCollection();
+    res.send(await workouts.find({}).toArray());
 });
 
-// ADD POSTS
+// ADD WORKOUTS
 router.post('/', async (req, res) => {
-    const posts = await loadPostsCollection();
-    await posts.insertOne({
+    const workouts = await loadWorkoutsCollection();
+    await workouts.insertOne({
+        id: req.body.id,
         title: req.body.title,
         type: req.body.type,
         time: req.body.time,
-        createdAt: new Date()
+        img: req.body.img,
     });
     res.status(201).send();
 })
 
-// DELETE POSTS
+// DELETE WORKOUTS
 router.delete('/:id', async (req, res) => {
-    const posts = await loadPostsCollection();
-    await posts.deleteOne({_id:new mongodb.ObjectID(req.params.id)});
+    const workouts = await loadWorkoutsCollection();
+    await workouts.deleteOne({_id:new mongodb.ObjectID(req.params.id)});
 
     res.status(200).send();
 });
 
-async function loadPostsCollection() {
+async function loadWorkoutsCollection() {
     const client = await mongodb.MongoClient.connect('mongodb+srv://admin:anastasia@smartmirror-tsmi5.mongodb.net/test?retryWrites=true&w=majority', {
         useNewUrlParser: true
     })
     
-    return client.db('vue_express').collection('posts');
+    return client.db('vue_express').collection('workouts');
 }
 
 module.exports = router;

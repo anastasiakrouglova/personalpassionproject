@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1 v-for="(item, index) in posts" :key="index">{{item.title}}</h1>
+    <!-- <h1 v-for="(item, index) in workouts" :key="index">{{item.title}}</h1> -->
     <router-view />
   </div>
 </template>
@@ -10,11 +10,11 @@ import {mapState} from 'vuex'
 export default {
   name: 'app',
   mounted() {
-    this.$store.dispatch('loadPosts')
+    this.$store.dispatch('loadWorkouts')
   },
   computed: {
     ...mapState([
-      'posts'
+      'workouts'
     ])
   }
 }
