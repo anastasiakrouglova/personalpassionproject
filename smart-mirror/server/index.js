@@ -4,22 +4,41 @@ const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
 const http = require('http').Server(app);
-const sio = require('socket.io')(http);
-
-sio.set('origins', 'http://localhost:3000');
 
 const workouts = require('./routes/api/workouts');
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => console.log('server started on port 3000'));
-const io = sio.listen(server);
+
+const io = require('socket.io')(server);
+//io.set('origins', 'http://localhost:3000/api/workouts');
+
+
+const videoState = {
+    videoStarted: false
+}
+
+io.on('connection', function(socket) {
+    console.log(socket.id)
+    socket.on('SEND_STARTMIRROR', function(data) {
+        io.emit('PLAY', data)
+    });
+    //socket.emit("videoState", videoStarted);
+});
 
 // Middleware
 app.use(bodyParser.json());
 app.use(cors({credentials: true, origin: 'http://localhost:8080'}));
 app.use('/api/workouts', workouts);
 
-io.on('connection', function (socket) {
-    socket.emit('hello');
-    console.log("connected");
+app.use('/api/workouts', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
 });
+
+
+
+
+// io.on('connection', function (data) {
+//     //data.emit('hello');
+//     console.log("connected");
+// });
 
