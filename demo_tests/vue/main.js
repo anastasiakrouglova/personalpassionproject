@@ -1,6 +1,13 @@
-var app = new Vue({
-    el: '#app',
-    data: {
-        product: 'Socks'
-    }
-})
+{
+    const init = () => {
+      
+    const app = new Vue({
+        el: '#app',
+        data: {
+            product: 'Socks'
+        }
+    })
+        
+  };
+  init();
+}
