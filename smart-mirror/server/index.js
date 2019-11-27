@@ -19,15 +19,20 @@ const videoState = {
 
 io.on('connection', function(socket) {
     console.log(socket.id)
-    socket.on('SEND_STARTMIRROR', function(data) {
+    socket.on('SEND_STARTMIRROR', function (data) {
+        //videoStarted = true;
         io.emit('PLAY', data)
+        io.sockets.emit('startplay', data);
     });
+    // socket.on('PLAY_TEST', data => {
+    //     io.emit('PLAY', data)
+    //   });
     //socket.emit("videoState", videoStarted);
 });
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors({credentials: true, origin: 'http://localhost:8080'}));
+app.use(cors({credentials: true, origin: Array('http://localhost:8080','http://localhost:8081') }));
 app.use('/api/workouts', workouts);
 
 app.use('/api/workouts', (req, res, next) => {
