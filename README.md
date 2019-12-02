@@ -13,7 +13,6 @@ Op internet kan je duizenden voorbeelden vinden van mensen die een smart mirror 
 
 Uiteindelijk besloot ik iets heel persoonlijks te maken. Ik doe kunstschaatsen op competitief niveau en naast Devine is dat een heel belangrijk onderdeel van mijn leven. In die sport wordt vooral gefocust op sprongen (zoveel mogelijk toertjes in de lucht draaien), pirouetten en schaatsvaardigheid/interpretatie van de muziek. Een belangrijk deel is snelheid, kracht, elegantie, lenigheid en connectie met muziek. Heel veel waarop dus gewerkt moet worden naast het ijs. Een trainer heeft veel schaatsers en kan niet voortdurend bij je zijn, daarom dat ik besloot om een persoonlijke trainer te maken die me zou aansporen om op een leuke manier thuis aan deze vereisten te werken.
 
-[voorbeeldscherm](./assets/img/readme/sport.png)
 
 ### Deliverables: 
 
