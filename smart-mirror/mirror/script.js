@@ -1,43 +1,50 @@
 {
-    const url = 'http://localhost:3000/api/workouts';
-
     let socket;
-    let videoStarted = false;
 
+    const time = () => {
+        let $currentTime = document.querySelector('#time');
+       
+        let currentDate = new Date();
+
+        let dateHours = currentDate.getHours();
+        let dateMinutes = currentDate.getMinutes();
+        //let dateSeconds = currentDate.getSeconds();
+
+        if (dateMinutes < 10) {
+            $currentTime.innerHTML = dateHours + ":0" + dateMinutes;
+        } else {
+            $currentTime.innerHTML = dateHours + ":" + dateMinutes;
+        }
+        window.requestAnimationFrame(time);
+    }
 
     async function findData() {
         const response = await fetch('http://localhost:3000/api/workouts');
         const myJson = await response.json();
         console.log(JSON.stringify(myJson));
     }
-    {
-        startVideo = () => {
-            console.log('in startfunctie');
-        }
-
-      const init = () => {
-          findData();
-
-          socket = io.connect('localhost:3000');
-
-          socket.on(`startplay`, (data) => {
-            console.log(data);
-              console.log('lalalalalal');
-              startVideo();
-          });
-
-          socket.on(`connect`, () => {
-              console.log(`Connected: ${socket.id}`);
-          });
-
-          if (videoStarted === true) {
-              console.log('VIDEO WORDT GESTAAAAAART')
-          } else {
-              console.log('VIDEO is nog niet gestart')
-          }
-      };
-      init();
+    
+    startVideo = () => {
+        window.location = "aftellen.html";
     }
+
+    const init = () => {
+        time()
+        findData();
+        socket = io.connect('localhost:3000');
+
+        socket.on(`startplay`, (data) => {
+            console.log(data);
+            startVideo();
+        });
+        
+
+        socket.on(`connect`, () => {
+            console.log(`Connected: ${socket.id}`);
+        });
+    };
+    init();
+    
 
 }
 

@@ -21,9 +21,26 @@ io.on('connection', function(socket) {
     console.log(socket.id)
     socket.on('SEND_STARTMIRROR', function (data) {
         //videoStarted = true;
-        io.emit('PLAY', data)
+        //io.emit('PLAY', data)
         io.sockets.emit('startplay', data);
     });
+
+    // VIDEO IS AAN HET AFSPELEN
+    socket.on('SEND_PLAYED', function (data) {
+        //videoStarted = true;
+        io.sockets.emit('playvideo', data);
+    });
+
+    // VIDEO IS GEPAUSEERD
+    socket.on('SEND_PAUZED', function (data) {
+        //videoStarted = true;
+        io.sockets.emit('pauzevideo', data);
+    });
+
+
+    
+
+    
     // socket.on('PLAY_TEST', data => {
     //     io.emit('PLAY', data)
     //   });
@@ -32,7 +49,7 @@ io.on('connection', function(socket) {
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors({credentials: true, origin: Array('http://localhost:8080','http://localhost:8081') }));
+app.use(cors({credentials: true, origin: '*' }));
 app.use('/api/workouts', workouts);
 
 app.use('/api/workouts', (req, res, next) => {
