@@ -17,7 +17,7 @@ Uiteindelijk besloot ik iets heel persoonlijks te maken. Ik doe kunstschaatsen o
 ### Deliverables: 
 
 - online code webapp smart mirror
-- fysieke smart mirror (op presentatie) met Raspberry Pi en spionspiegel
+- fysieke smart mirror (op presentatie) met Raspberry Pi en one sided mirror.
 
 ### Url naar je blog
 http://anastasiakrouglova.be/blog/
