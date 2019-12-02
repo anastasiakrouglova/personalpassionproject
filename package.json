@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "repository": "https://github.com/anastasiakrouglova/personalpassionproject/tree/develop",
+  
   "scripts": {
     "start": "node server/index.js",
     "dev": "nodemon server/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Anastasia Krouglova <anastasia.krouglova@student.howest.be",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
