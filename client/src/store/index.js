@@ -13,13 +13,13 @@ Vue.use(Vuex, axios);
 
 Vue.use(new VueSocketIO({
   // debug: true,
-  connection: 'http://localhost:3000/api/workouts',
+  connection: 'https://mirrorcontrol.herokuapp.com/api/workouts',
   //options: { path: "/my-app/" } //Optional options
 }))
 
 export default new Vuex.Store({
   state: {
-    socket: io('localhost:3000'),
+    socket: io('https://mirrorcontrol.herokuapp.com/'),
     videoStarted: false,
 
     playing: true,
@@ -50,7 +50,7 @@ export default new Vuex.Store({
     },
     loadWorkouts({ commit }) {
       axios
-        .get('http://localhost:3000/api/workouts')
+        .get('https://mirrorcontrol.herokuapp.com/api/workouts')
         .then(data => {
           //console.log(data.data)
           let workouts = data.data
@@ -83,19 +83,6 @@ export default new Vuex.Store({
       this.state.socket.emit('SEND_PLAYED', {
         playPauzed: this.state.playing
       });
-      //console.log(this.state.playing);
     },
-    // getOptions = (method, body = null) => {
-    //   const options = {
-    //     method: method.toUpperCase(),
-    //     headers: {
-    //       "content-type": `application/json`
-    //     }
-    //   };
-    //   if (body) {
-    //     options.body = JSON.stringify(body);
-    //   }
-    //   return options;
-    // },
   }
 });

@@ -1,8 +1,8 @@
 {
-    const url = 'http://localhost:3000/api/workouts';
+    const url = 'https://mirrorcontrol.herokuapp.com/api/workouts';
 
     async function findData() {
-        const response = await fetch('http://localhost:3000/api/workouts');
+        const response = await fetch('https://mirrorcontrol.herokuapp.com/api/workouts');
         const myJson = await response.json();
         console.log(JSON.stringify(myJson));
     }

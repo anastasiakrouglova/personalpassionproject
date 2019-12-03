@@ -19,7 +19,7 @@
     }
 
     async function findData() {
-        const response = await fetch('http://localhost:3000/api/workouts');
+        const response = await fetch('https://mirrorcontrol.herokuapp.com/api/workouts');
         const myJson = await response.json();
         console.log(JSON.stringify(myJson));
     }
@@ -31,7 +31,7 @@
     const init = () => {
         time()
         findData();
-        socket = io.connect('localhost:3000');
+        socket = io.connect('https://mirrorcontrol.herokuapp.com');
 
         socket.on(`startplay`, (data) => {
             console.log(data);
