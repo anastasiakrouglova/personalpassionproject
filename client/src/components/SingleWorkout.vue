@@ -69,8 +69,8 @@ export default {
     overflow-x: scroll;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+    padding-left: 1rem;
 }
-
 
 .container{
     list-style-type: none;
