@@ -48,6 +48,7 @@ io.on('connection', function(socket) {
 // app.use(staticFileMiddleware);
 
 app.use(serveStatic(__dirname + "/dist"));
+app.use(serveStatic(__dirname + "/mirror/public"));
 
 app.use(bodyParser.json());
 app.use(cors({credentials: true, origin: '*' }));
