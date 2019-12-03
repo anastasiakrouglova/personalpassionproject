@@ -41,7 +41,9 @@ io.on('connection', function(socket) {
 // Middleware
 // TODO: static folder met je client project linken
 //app.use(express.static('dist'));
-express.static(path.join(__dirname + '/dist'))
+
+const staticFileMiddleware = express.static(path.join(__dirname + '/dist'));
+app.use(staticFileMiddleware);
 
 app.use(bodyParser.json());
 app.use(cors({credentials: true, origin: '*' }));
