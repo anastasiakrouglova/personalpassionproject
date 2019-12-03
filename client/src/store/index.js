@@ -25,7 +25,6 @@ export default new Vuex.Store({
     playing: true,
     workout: 'video mag afgespeeld worden',
     workouts: [],
-    entity: entity
         // workouts: [
         //   { id: 1, title: 'Sterkere landing', type:'jump', time:'13min' },
         //   { id: 2, title: 'Hoogte in sprongen', type:'jump', time:'10min' },
@@ -51,7 +50,7 @@ export default new Vuex.Store({
     },
     loadWorkouts({ commit }) {
       axios
-        .get('/api/workouts')
+        .get('http://localhost:3000/api/workouts')
         .then(data => {
           //console.log(data.data)
           let workouts = data.data
