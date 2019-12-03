@@ -47,7 +47,8 @@ io.on('connection', function(socket) {
 // const staticFileMiddleware = express.static(path.join(__dirname + '/dist'));
 // app.use(staticFileMiddleware);
 
-app.use(serveStatic(__dirname + "/dist"));
+
+//app.use(serveStatic(__dirname + "/dist"));
 app.use(serveStatic(__dirname + "/mirror/public"));
 
 app.use(bodyParser.json());
