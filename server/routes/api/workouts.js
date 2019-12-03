@@ -18,6 +18,7 @@ router.post('/', async (req, res) => {
         type: req.body.type,
         time: req.body.time,
         img: req.body.img,
+        song: req.body.song
     });
     res.status(201).send();
 })
