@@ -25,6 +25,7 @@ export default new Vuex.Store({
     playing: true,
     workout: 'video mag afgespeeld worden',
     workouts: [],
+    entity: entity
         // workouts: [
         //   { id: 1, title: 'Sterkere landing', type:'jump', time:'13min' },
         //   { id: 2, title: 'Hoogte in sprongen', type:'jump', time:'10min' },
@@ -50,7 +51,7 @@ export default new Vuex.Store({
     },
     loadWorkouts({ commit }) {
       axios
-        .get('http://localhost:3000/api/workouts')
+        .get('/api/workouts')
         .then(data => {
           //console.log(data.data)
           let workouts = data.data
@@ -84,6 +85,18 @@ export default new Vuex.Store({
         playPauzed: this.state.playing
       });
       //console.log(this.state.playing);
-    }
+    },
+    // getOptions = (method, body = null) => {
+    //   const options = {
+    //     method: method.toUpperCase(),
+    //     headers: {
+    //       "content-type": `application/json`
+    //     }
+    //   };
+    //   if (body) {
+    //     options.body = JSON.stringify(body);
+    //   }
+    //   return options;
+    // },
   }
 });
