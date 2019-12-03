@@ -10,12 +10,12 @@ sio.set('origins', 'https://mirrorcontrol.herokuapp.com');
 
 const workouts = require('./routes/api/workouts');
 const port = process.env.PORT || 3000;
-const server = app.listen(port, () => console.log('server started on port 3000'));
+const server = app.listen(port, () => console.log('server started'));
 const io = sio.listen(server);
 
 // Middleware
 app.use(bodyParser.json());
-app.use(cors({credentials: true, origin: 'http://localhost:8080'}));
+app.use(cors({credentials: true, origin: 'https://mirrorcontrol.herokuapp.com'}));
 app.use('/api/workouts', workouts);
 
 io.on('connection', function (socket) {
