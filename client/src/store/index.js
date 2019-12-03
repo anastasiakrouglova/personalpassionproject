@@ -57,7 +57,7 @@ export default new Vuex.Store({
           commit('SET_WORKOUTS', workouts)
         })
         .catch(error => {
-          console.log('aiiii er liep iets mis')
+          //tja
         })
     },
     sendSocket() {
@@ -67,23 +67,23 @@ export default new Vuex.Store({
       });
     },
     pauzeVideoSocket() {
-      console.log('VIDEO PAUZE');
+      //console.log('VIDEO PAUZE');
 
       this.state.playing = false;
       this.state.socket.emit('SEND_PAUZED', {
         playPauzed: this.state.playing
       });
 
-      console.log(this.state.playing);
+      //console.log(this.state.playing);
     },
     playVideoSocket() {
-      console.log('VIDEO PLAY');
+      //console.log('VIDEO PLAY');
 
       this.state.playing = true;
       this.state.socket.emit('SEND_PLAYED', {
         playPauzed: this.state.playing
       });
-      console.log(this.state.playing);
+      //console.log(this.state.playing);
     }
   }
 });

@@ -1,6 +1,6 @@
 <template>
   <div class="training-container">
-    <video ref="videoTraining" @ended="onPlayerEnded()" autoplay src="../assets/video/workout1.mp4" width=100></video>
+    <video ref="videoTraining" @ended="onPlayerEnded()" autoplay src="/assets/video/workout1.mp4" width=100></video>
     <div>
       <span  @click="play()"><PlayIcon  class="play-control-item play" v-show="!isPlaying" w="30" h="30"/></span>
       <span @click="pauze()"><PauseIcon class="play-control-item pauze" v-show="isPlaying" w="30" h="30"/></span>

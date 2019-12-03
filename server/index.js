@@ -40,7 +40,7 @@ io.on('connection', function(socket) {
 
 // Middleware
 // TODO: static folder met je client project linken
-app.use(express.static('../client'));
+app.use(express.static('dist'));
 
 app.use(bodyParser.json());
 app.use(cors({credentials: true, origin: '*' }));

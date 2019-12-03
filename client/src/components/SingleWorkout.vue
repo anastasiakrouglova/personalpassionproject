@@ -58,10 +58,6 @@ export default {
         return this.$store.state.workouts.filter(stretch => {
             return stretch.type === 'stretch'
         })
-    },
-    getImgUrl(foto) {
-        var images = require.context('../assets/img/', false, /\.png$/)
-        return images('./' + foto + ".png")
     }
   }
 };

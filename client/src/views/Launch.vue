@@ -1,7 +1,7 @@
 <template>
   <div class="launch-container">
     <p class="timer" @click="start()">{{countDown}}</p>
-    <img clas="img-connection" src="../assets/img/connection.svg" alt="connection" >
+    <img clas="img-connection" src="/assets/img/connection.svg" alt="connection" >
     <p class="text">Leg je gsm aan de kant en ga voor de spiegel staan.</p>
   </div>
 </template>
