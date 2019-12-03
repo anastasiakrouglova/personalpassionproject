@@ -6,7 +6,7 @@ const cors = require('cors');
 const http = require('http').Server(app);
 const sio = require('socket.io')(http);
 
-sio.set('origins', 'http://localhost:3000');
+sio.set('origins', 'https://mirrorcontrol.herokuapp.com');
 
 const workouts = require('./routes/api/workouts');
 const port = process.env.PORT || 3000;
