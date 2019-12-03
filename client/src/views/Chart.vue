@@ -1,6 +1,7 @@
 <template>
   <div class="charts">
     <p>GOOD JOB! Hier is jouw grafiek</p>
+    
     <router-link to="/"><span class="button-start">ga terug naar oefeningen</span></router-link>
     <trend
     :data="[0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0]"
@@ -8,6 +9,7 @@
     auto-draw
     smooth>
   </trend>
+  <img src="/assets/img/done.gif" alt="test">
   </div>
 </template>
 

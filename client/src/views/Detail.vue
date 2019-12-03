@@ -65,7 +65,7 @@ export default {
   .arrowback {
   display: flex;
   margin: 1rem;
-  z-index: 3;
+  z-index: 1;
   fill: white;
   position: absolute;
   }
@@ -73,7 +73,7 @@ export default {
 .button-start {
   width: 5rem;
   height: 5rem;
-  z-index: 4;
+  z-index: 1;
   position: absolute;
   background-color:rgba(255, 255, 255, 0.3);
   border-radius: 50%;

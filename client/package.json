@@ -17,6 +17,7 @@
     "swup": "^1.9.0",
     "vue": "^2.6.10",
     "vue-ionicons": "^3.0.4",
+    "vue-material": "^1.0.0-beta-11",
     "vue-native-websocket": "^2.0.13",
     "vue-page-transition": "^0.2.2",
     "vue-router": "^3.1.3",

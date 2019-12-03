@@ -22,9 +22,7 @@ created() {
     }    
 },
 updated() {
-    console.log(this.countDown);
     if(this.countDown < 0) {
-        console.log("stooop")
         this.countDown = 0;
         this.$router.push('/detail/' + this.$route.params.id + '/training');
     }

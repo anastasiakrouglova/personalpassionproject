@@ -4,6 +4,12 @@
     <div>
       <span  @click="play()"><PlayIcon  class="play-control-item play" v-show="!isPlaying" w="30" h="30"/></span>
       <span @click="pauze()"><PauseIcon class="play-control-item pauze" v-show="isPlaying" w="30" h="30"/></span>
+    
+      <div>
+        <md-progress-bar md-mode="determinate" :md-value="amount"></md-progress-bar>
+        <md-progress-bar class="md-accent" md-mode="determinate" :md-value="amount"></md-progress-bar>
+        <input type="range" v-model.number="amount"> {{ amount }}%
+      </div>
     </div>
   </div>
 </template>
@@ -12,16 +18,17 @@
 import io from "socket.io-client";
 import PlayIcon from 'vue-ionicons/dist/md-play'
 import PauseIcon from 'vue-ionicons/dist/md-pause'
+import { mdProgressBar } from 'vue-material/dist/components'
 
 export default {
   name:'App',
   components: {
-    PlayIcon, PauseIcon
+    PlayIcon, PauseIcon, mdProgressBar
   },
   data () {
     return {
       isPlaying: true,
-      fill : { gradient: ["red", "green", "blue"] }
+      amount: 50
     }
   },
   created() {
@@ -62,6 +69,10 @@ export default {
 
 
 <style>
+.md-progress-bar {
+    margin: 24px;
+  }
+
 .pauze {
   background-image: url(https://himalayasingh.github.io/audio-player-play-and-pause-animation-1/img/bg.gif);
   background-size: cover;
@@ -90,7 +101,7 @@ export default {
 }
 
 .training-container {
-  background-color: black;
+  /* background-color: black; */
   height: 100%;
 }
 </style>
