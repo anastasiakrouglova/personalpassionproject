@@ -53,7 +53,7 @@ export default {
     }
   },
   onPlayerEnded() {
-    console.log('video is ten einde')
+    //console.log('video is ten einde')
     this.$router.push('/chart');
   }
 }
