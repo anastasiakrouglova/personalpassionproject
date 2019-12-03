@@ -41,16 +41,7 @@ io.on('connection', function(socket) {
 });
 
 // Middleware
-// TODO: static folder met je client project linken
-//app.use(express.static('dist'));
-
-// const staticFileMiddleware = express.static(path.join(__dirname + '/dist'));
-// app.use(staticFileMiddleware);
-
-
 app.use(serveStatic(__dirname + "/dist"), serveStatic(__dirname + "/mirror"));
-//app.use(serveStatic(__dirname + "/mirror"));
-//app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.json());
 app.use(cors({credentials: true, origin: '*' }));
@@ -59,8 +50,3 @@ app.use('/api/workouts', workouts);
 app.use('/api/workouts', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
 });
-
-// app.get('/', function (req, res) {
-//     res.render(path.join(__dirname + '/dist/index.html'));
-//   });
-
