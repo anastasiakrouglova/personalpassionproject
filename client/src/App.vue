@@ -45,4 +45,7 @@ export default {
   overflow-y: scroll;
   
 }
+
+
+body { margin: 0; }
 </style>
