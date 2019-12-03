@@ -36,18 +36,10 @@ io.on('connection', function(socket) {
         //videoStarted = true;
         io.sockets.emit('pauzevideo', data);
     });
-
-
-    
-
-    
-    // socket.on('PLAY_TEST', data => {
-    //     io.emit('PLAY', data)
-    //   });
-    //socket.emit("videoState", videoStarted);
 });
 
 // Middleware
+// TODO: static folder met je client project linken
 app.use(bodyParser.json());
 app.use(cors({credentials: true, origin: '*' }));
 app.use('/api/workouts', workouts);
@@ -55,12 +47,4 @@ app.use('/api/workouts', workouts);
 app.use('/api/workouts', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
 });
-
-
-
-
-// io.on('connection', function (data) {
-//     //data.emit('hello');
-//     console.log("connected");
-// });
 
