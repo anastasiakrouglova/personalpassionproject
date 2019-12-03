@@ -48,8 +48,8 @@ io.on('connection', function(socket) {
 // app.use(staticFileMiddleware);
 
 
-//app.use(serveStatic(__dirname + "/dist"));
-app.use(serveStatic(__dirname + "/mirror"));
+app.use(serveStatic(__dirname + "/dist"), serveStatic(__dirname + "/mirror"));
+//app.use(serveStatic(__dirname + "/mirror"));
 //app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.json());
