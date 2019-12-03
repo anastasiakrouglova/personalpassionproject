@@ -6,8 +6,8 @@ const cors = require('cors');
 const http = require('http').Server(app);
 
 const workouts = require('./routes/api/workouts');
-const port = process.env.PORT || 3000;
-const server = app.listen(port, () => console.log('server started on port 3000'));
+const port = process.env.PORT || 8080;
+const server = app.listen(port, () => console.log('server started on port 8080'));
 
 const io = require('socket.io')(server);
 //io.set('origins', 'http://localhost:3000/api/workouts');
@@ -40,6 +40,8 @@ io.on('connection', function(socket) {
 
 // Middleware
 // TODO: static folder met je client project linken
+app.use(express.static('../client'));
+
 app.use(bodyParser.json());
 app.use(cors({credentials: true, origin: '*' }));
 app.use('/api/workouts', workouts);

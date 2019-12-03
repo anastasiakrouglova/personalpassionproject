@@ -7,8 +7,8 @@
                     <p class='time'>{{workout.time}}</p>
                     <!-- <img class="bg-image" v-attr="src: imageLink" alt="jump2" width=60%> -->
                     <!-- <img :src="getImgUrl(workout.img)" v-bind:alt="workout.img"> -->
-                    <img class="bg-image" :src="'../assets/img/' + 'sterkeLanding' + '.png'" alt="jump2" width=60%>
-                    <!-- <img class="bg-image" src="../assets/img/sterkeLanding.png" alt="jump2" width=60%> -->
+                    <img class="bg-image" :src="'/assets/img/' + workout.img + '.png'" alt="jump2" width=60%>
+                    <!-- <img class="bg-image" src="/assets/img/sterkeLanding.png" alt="jump2" width=60%> -->
                 </router-link>
             </li>
         </div>
