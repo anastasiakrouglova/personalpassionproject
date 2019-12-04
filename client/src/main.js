@@ -8,10 +8,17 @@ import VueSocketIO from 'vue-socket.io';
 // import 'vue-material/dist/vue-material.min.css'
 // import 'vue-material/dist/theme/default.css'
 
+// import heartRateSensor from "./bluetooth/app.js"
+// Vue.use(heartRateSensor, '$heartRateSensor');
+
 Vue.config.productionTip = false;
 
 new Vue({
   router,
   store,
-  render: h => h(App)
+  //heartRateSensor,
+  render: h => h(App),
+  // created() {
+  //   console.log(this.$heartRateSensor ? 'Library works!' : 'Uh oh..')
+  // }
 }).$mount("#app");

@@ -17,52 +17,44 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Pirouette.vue")
+      import("../views/Pirouette.vue")
   },
   {
     path: "/stretch",
     name: "stretch",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Stretch.vue")
+      import( "../views/Stretch.vue")
   },
   {
     path: "/detail/:id",
     name: "detail",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Detail.vue")
+      import("../views/Detail.vue")
   },
   {
     path: "/detail/:id/launch",
     name: "launch",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Launch.vue")
+      import("../views/Launch.vue")
   },
   {
     path: "/detail/:id/training",
     name: "training",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Training.vue")
+      import("../views/Training.vue")
   },
   {
     path: "/chart",
     name: "chart",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Chart.vue")
+      import("../views/Chart.vue")
+  },
+  ,
+  {
+    path: "/settings",
+    name: "settings",
+    component: () =>
+      import( "../views/Settings.vue")
   }
 ];
 

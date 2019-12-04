@@ -15,7 +15,8 @@ export default {
     Tabs
   },
   mounted() {
-    this.$store.dispatch('loadWorkouts')
+    this.$store.dispatch('loadWorkouts');
+    this.$store.dispatch('loadStats')
   },
   computed: {
     ...mapState([

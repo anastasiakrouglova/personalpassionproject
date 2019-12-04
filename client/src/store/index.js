@@ -21,7 +21,7 @@ export default new Vuex.Store({
     playing: true,
     workout: 'video mag afgespeeld worden',
     workouts: [],
-    stats: [1, 3,5],
+    stats: [],
   },
   mutations: {
     SET_WORKOUTS(state, workouts) {
@@ -55,6 +55,7 @@ export default new Vuex.Store({
           //console.log(data.data)
           let stats = data.data
           commit('SET_STATS', stats)
+          
         })
         .catch(error => {
           //tja

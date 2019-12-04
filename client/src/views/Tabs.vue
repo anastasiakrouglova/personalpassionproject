@@ -2,8 +2,8 @@
   <div>
     <nav class="tabs">
       <router-link to="/"><MdFitnessIcon w="25" h="25" /></router-link>
-      <router-link to="/Chart"><MdStatsIcon w="25" h="25" /></router-link>
-      <router-link to="/stretch"><MdSettingsIcon w="25" h="25" /></router-link>
+      <router-link to="/chart"><MdStatsIcon w="25" h="25" /></router-link>
+      <router-link to="/settings"><MdSettingsIcon w="25" h="25" /></router-link>
     </nav>
   </div>
 </template>
