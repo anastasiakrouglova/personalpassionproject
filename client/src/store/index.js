@@ -22,6 +22,7 @@ export default new Vuex.Store({
     workout: 'video mag afgespeeld worden',
     workouts: [],
     stats: [],
+    workoutDone: false
   },
   mutations: {
     SET_WORKOUTS(state, workouts) {
@@ -61,6 +62,18 @@ export default new Vuex.Store({
           //tja
         })
     },
+    postWorkoutifDone({ commit }) {
+      axios
+      .post('https://mirrorcontrol.herokuapp.com/api/stats')
+      .then(data => {
+        //console.log(data.data)
+        let stats = data.data
+        commit('SET_STATS', stats);
+      })
+      .catch(error => {
+        //tja
+      })
+    },
     sendSocket() {
       this.state.videoStarted = false;
       this.state.socket.emit('SEND_STARTMIRROR', {
@@ -69,17 +82,14 @@ export default new Vuex.Store({
     },
     pauzeVideoSocket() {
       //console.log('VIDEO PAUZE');
-
       this.state.playing = false;
       this.state.socket.emit('SEND_PAUZED', {
         playPauzed: this.state.playing
       });
-
       //console.log(this.state.playing);
     },
     playVideoSocket() {
       //console.log('VIDEO PLAY');
-
       this.state.playing = true;
       this.state.socket.emit('SEND_PLAYED', {
         playPauzed: this.state.playing

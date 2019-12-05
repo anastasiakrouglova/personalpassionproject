@@ -14,9 +14,11 @@ router.post('/', async (req, res) => {
     const stats = await loadStatsCollection();
     await stats.insertOne({
         id: req.body.id,
-        day: Date(),
+        day: req.body.day,
+        // day: new Date().getDay(),
         type: req.body.type,
         duration: req.body.duration,
+        workoutDone: req.body.workoutDone
     });
     res.status(201).send();
 })
