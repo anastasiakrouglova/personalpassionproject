@@ -40,5 +40,9 @@
     "eslint-plugin-vue": "^5.0.0",
     "prettier": "^1.18.2",
     "vue-template-compiler": "^2.6.10"
-  }
+  },
+  "description": "## Project setup ``` npm install ```",
+  "main": ".eslintrc.js",
+  "author": "",
+  "license": "ISC"
 }

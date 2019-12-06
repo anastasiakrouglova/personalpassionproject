@@ -2,6 +2,7 @@
   <div class="training-container">
     <video ref="videoTraining" @ended="onPlayerEnded()" autoplay src="/assets/video/workout1.mp4" width=100></video>
     <div>
+      <router-link class="arrowback" to="/"><ArrowBackIcon class="arrowback" w="30" h="30" /></router-link>
       <span  @click="play()"><PlayIcon  class="play-control-item play" v-show="!isPlaying" w="30" h="30"/></span>
       <span @click="pauze()"><PauseIcon class="play-control-item pauze" v-show="isPlaying" w="30" h="30"/></span>
       <!-- <div>
@@ -17,12 +18,13 @@
 import io from "socket.io-client";
 import PlayIcon from 'vue-ionicons/dist/md-play'
 import PauseIcon from 'vue-ionicons/dist/md-pause'
+import ArrowBackIcon from 'vue-ionicons/dist/md-arrow-back'
 // import { mdProgressBar } from 'vue-material/dist/components'
 
 export default {
   name:'App',
   components: {
-    PlayIcon, PauseIcon,
+    PlayIcon, PauseIcon, ArrowBackIcon
     //  mdProgressBar
   },
   data () {

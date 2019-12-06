@@ -1,15 +1,23 @@
 <template>
   <div class="charts">
     <p>GOOD JOB! Hier is jouw grafiek</p>
-    <!-- <li class="days-container" v-for='day in days' :key="day.id">
-        <span v-if="day !== currentday">{{day}}</span>
-        <span ref="todayRef" class="current-day" v-if="day === currentday">{{day}}</span>
-        <div v-if="$store.workoutDone === true && day === currentday">DONE</div>
-    </li> -->
     <li class="days-container" v-for='daydb in doneDays' :key="daydb.id">
-        <!--s if false en true -> true, if monday -> zet alles weer op false -->
-        <span v-if="daydb.day !== currentday">{{days[daydb.day -1]}} - {{daydb.workoutDone}} - ({{daydb.day}})</span>
-        <span class="current-day" v-if="daydb.day === currentday">{{days[daydb.day -1]}} - {{daydb.workoutDone}} - ({{daydb.day}})</span>
+
+<!-- && daydb.workoutDone === 'true' -->
+        <span v-if="daydb.day === daydb.id && daydb.workoutDone === 'true'">{{daydb.day}} - {{daydb.id}}</span>
+
+<!-- v-if="daydb.day === daydb.day && daydb.id !== daydb.id" -->
+<!-- || daydb.day !== currentday && daydb.workoutDone === 'false' && daydb.day == daydb.id -->
+        <div >
+          <span v-if="
+          daydb.day !== currentday && daydb.day == daydb.id && daydb.workoutDone === 'true' 
+          || daydb.day !== currentday && daydb.workoutDone === 'true'
+          || daydb.day !== currentday && daydb.workoutDone === 'true' && daydb.day == daydb.id">
+          
+            {{days[daydb.day -1]}} - {{daydb.workoutDone}} - ({{daydb.day}})
+          </span>
+          <span class="current-day" v-if="daydb.day === currentday && daydb.day == daydb.id">{{days[daydb.day -1]}} - {{daydb.workoutDone}} - ({{daydb.day}})</span>
+        </div>
     </li>
 
     <router-link to="/"><span class="button-start">ga terug naar oefeningen</span></router-link>
@@ -49,8 +57,9 @@ export default {
     }
   },
   computed: {
-    doneDays() {
-      this.filterDays()
+  doneDays() {
+    this.filterDays()
+    this.ShowOnce()
     return this.$store.state.stats;
   }
   },
@@ -59,11 +68,21 @@ export default {
       this.$store.state.stats.sort(function(x, y) {
         return -(y.day - x.day);
       });
+    },
+    ShowOnce() {
+      console.log(this.$store.state.stats[2].day)
+      console.log(this.$store.state.stats[8].day)
+      if (this.$store.state.stats[1].day === this.$store.state.stats[2].day) {
+        console.log('hetzelfde')
+      }
+      // this.$store.state.stats.sort(function(x, y) {
+      //   return -(y.day - x.day);
+      // });
     }
   }
 }
-
 </script>
+
 
 <style >
 .charts {
