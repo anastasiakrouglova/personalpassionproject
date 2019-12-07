@@ -120,9 +120,9 @@ export default {
 
 .bg-image {
     left: -2;
-    width: 160px;
-    margin-top: 0.3rem;
-    margin-left: -6rem;
+    width: 190px;
+    margin-top: -1rem;
+    margin-left: -4rem;
     z-index: -1;
     display: relative;
 }
