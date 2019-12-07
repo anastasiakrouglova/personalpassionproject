@@ -6,7 +6,7 @@
                 <div>
                     <p class='exercise'>{{workout.title}}</p>
                     <p class='time'>{{workout.time}} - {{workout.level}}</p>
-                    <img class="bg-image" :src="'/assets/img/' + workout.img + '.png'" alt="jump2" width=60%>
+                    <img class="bg-image" :src="'/assets/img/cover/' + workout.img + '.png'" alt="jump2" width=60%>
                 </div>
                 </router-link>
             </li>
@@ -14,16 +14,22 @@
         <div class="maxi-container" v-if="this.$route.path === '/pirouette'">
             <li class="container" v-for='workout in onlyPirouettes' :key="workout.id">
                 <router-link class="router-item" type="type" v-bind:to="'/detail/' + workout.id">
+                <div>
                     <p class='exercise'>{{workout.title}}</p>
-                    <p class='time'>{{workout.time}}</p>
+                    <p class='time'>{{workout.time}} - {{workout.level}}</p>
+                    <img class="bg-image" :src="'/assets/img/cover/' + workout.img + '.png'" alt="jump2" width=60%>
+                </div>
                 </router-link>
             </li>
         </div>
         <div class="maxi-container" v-if="this.$route.path === '/stretch'">
             <li class="container" v-for='workout in onlyStretch' :key="workout.id">
                 <router-link class="router-item" type="type" v-bind:to="'/detail/' + workout.id">
+                <div>
                     <p class='exercise'>{{workout.title}}</p>
-                    <p class='time'>{{workout.time}}</p>
+                    <p class='time'>{{workout.time}} - {{workout.level}}</p>
+                    <img class="bg-image" :src="'/assets/img/cover/' + workout.img + '.png'" alt="jump2" width=60%>
+                </div>
                 </router-link>
             </li>
         </div>

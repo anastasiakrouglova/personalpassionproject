@@ -51,7 +51,7 @@ export default {
     let today = this.days[this.todayNumber - 1] // Vandaag in cijfers -1 omdat array van 0 begint
     //this.currentday = today
     this.currentday = this.todayNumber
-    console.log(this.currentday)
+    //console.log(this.currentday)
 
     if (this.$store.workoutDone === true) {
     }
@@ -70,10 +70,10 @@ export default {
       });
     },
     ShowOnce() {
-      console.log(this.$store.state.stats[2].day)
-      console.log(this.$store.state.stats[8].day)
+      //console.log(this.$store.state.stats[2].day)
+      //console.log(this.$store.state.stats[8].day)
       if (this.$store.state.stats[1].day === this.$store.state.stats[2].day) {
-        console.log('hetzelfde')
+        //console.log('hetzelfde')
       }
       // this.$store.state.stats.sort(function(x, y) {
       //   return -(y.day - x.day);

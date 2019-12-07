@@ -26,7 +26,7 @@ export default {
   },
   methods: {
 statusText() {
-    console.log('lalala')
+    //console.log('lalala')
     this.$refs.bpm.textContent = 'Searching...';
     //this.data;
     //heartRateSensor.connect()

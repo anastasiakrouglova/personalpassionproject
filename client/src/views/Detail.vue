@@ -2,9 +2,9 @@
   <div class="detail">
     <router-link @click="stop()" class="arrowback" to="/"><ArrowBackIcon class="arrowback" w="30" h="30" /></router-link>
     <div class="column">
-      <router-link  v-bind:to="'/detail/' + $route.params.id + '/launch'"><span  @click="socketToevoegen()"><PlayIcon class="button-start" style="fill: white" w="25" h="25"/></span></router-link>
+      <router-link  v-bind:to="'/detail/' + $route.params.id + '/launch'"><span  @click="socketToevoegen()"><PlayIcon class="button-start-workout" style="fill: white" w="25" h="25"/></span></router-link>
     </div>
-    <img class="img-detail" :src="'/assets/img/' + this.$store.state.workouts[$route.params.id - 1].img + '.png'" alt="img">
+    <img class="img-detail" :src="'/assets/img/cover/' + this.$store.state.workouts[$route.params.id - 1].img + '.png'" alt="img">
     <div class="detail-container">
       <div class="info-container">
         <div>
@@ -70,7 +70,7 @@ export default {
   position: absolute;
   }
 
-.button-start {
+.button-start-workout {
   width: 5rem;
   height: 5rem;
   z-index: 1;
