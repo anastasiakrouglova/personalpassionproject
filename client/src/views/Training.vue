@@ -1,6 +1,7 @@
 <template>
   <div class="training-container">
-    <video ref="videoTraining" @ended="onPlayerEnded()" autoplay src="/assets/video/workout1.mp4" width=100></video>
+    <!-- <img class="bg-image" :src="'/assets/img/cover/' + workout.img + '.png'" alt="jump2" width=60%> -->
+    <video ref="videoTraining" @ended="onPlayerEnded()" autoplay src="'/assets/video/sterkeLanding.3gp'" width=100></video>
     <div>
       <router-link class="arrowback" to="/"><ArrowBackIcon class="arrowback" w="30" h="30" /></router-link>
       <span  @click="play()"><PlayIcon  class="play-control-item play" v-show="!isPlaying" w="30" h="30"/></span>
