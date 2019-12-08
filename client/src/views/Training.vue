@@ -1,9 +1,8 @@
 <template>
   <div class="training-container">
-    <!-- <img class="bg-image" :src="'/assets/img/cover/' + workout.img + '.png'" alt="jump2" width=60%> -->
-    <video ref="videoTraining" @ended="onPlayerEnded()" autoplay :src="'/assets/video/' + this.$store.state.workouts[$route.params.id - 1].img + '.mp4'" width=300></video>
+    <router-link class="arrowback" to="/"><ArrowBackIcon class="arrowback-training" w="30" h="30" /></router-link>
+    <video class="video-workout" ref="videoTraining" @ended="onPlayerEnded()" autoplay :src="'/assets/video/' + this.$store.state.workouts[$route.params.id - 1].img + '.mp4'" width=300></video>
     <div>
-      <router-link class="arrowback" to="/"><ArrowBackIcon class="arrowback" w="30" h="30" /></router-link>
       <span  @click="play()"><PlayIcon  class="play-control-item play" v-show="!isPlaying" w="30" h="30"/></span>
       <span @click="pauze()"><PauseIcon class="play-control-item pauze" v-show="isPlaying" w="30" h="30"/></span>
       <!-- <div>
@@ -75,30 +74,45 @@ export default {
 </script>
 
 <style>
+
+.arrowback-training {
+  fill: white;
+  text-align: left;
+  padding-left: 2rem;
+  padding-top: 2rem;
+}
 .md-progress-bar {
     margin: 24px;
   }
 
+.video-workout {
+  margin-top: -2rem;
+}
+
 .pauze {
   background-image: url(https://himalayasingh.github.io/audio-player-play-and-pause-animation-1/img/bg.gif);
-  background-size: cover;
-  background-position: 50%;
-  margin: 1rem;
-  border-radius: 5rem;
-  padding: 1rem 1rem 0rem 1rem;
+  background-size: 13rem;
+  background-repeat: no-repeat;
+  background-position-x: 50%;
+  background-position-y: 0rem;
+  margin: -1rem;
+  padding: 2.6rem 1rem 0rem 1rem;
   color: white;
   height: 8rem;
+  overflow-x: hidden;
 }
 
 .play {
   background-image: url(https://himalayasingh.github.io/audio-player-play-and-pause-animation-1/img/f1.gif);
-  background-size: cover;
-  background-position: 50%;
-  margin: 1rem;
-  border-radius: 5rem;
-  padding: 1rem 1rem 0rem 1rem;
+  background-size: 13rem;
+  background-repeat: no-repeat;
+  background-position-x: 50%;
+  background-position-y: -1rem;
+  margin: 0rem;
+  padding: 1.6rem 1rem 0rem 1rem;
   color: white;
   height: 8rem;
+  overflow-x: hidden;
 }
 
 .play-control-item {
@@ -106,7 +120,7 @@ export default {
 }
 
 .training-container {
-  /* background-color: black; */
+  background-color: black;
   height: 100%;
 }
 </style>
