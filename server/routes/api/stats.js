@@ -18,7 +18,8 @@ router.post('/', async (req, res) => {
         // day: new Date().getDay(),
         type: req.body.type,
         duration: req.body.duration,
-        workoutDone: req.body.workoutDone
+        workoutDone: req.body.workoutDone,
+        date: req.body.date
     });
     res.status(201).send();
 })
