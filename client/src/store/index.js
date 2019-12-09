@@ -22,7 +22,9 @@ export default new Vuex.Store({
     workout: 'video mag afgespeeld worden',
     workouts: [],
     stats: [],
-    workoutDone: false
+
+    workoutDone: false,
+    week: '2'
   },
   mutations: {
     SET_WORKOUTS(state, workouts) {
@@ -62,18 +64,39 @@ export default new Vuex.Store({
           //tja
         })
     },
-    postWorkoutifDone({ commit }) {
+    postWorkoutifDone({commit}) {
       axios
-      .post('https://mirrorcontrol.herokuapp.com/api/stats')
-      .then(data => {
-        //console.log(data.data)
-        let stats = data.data
-        commit('SET_STATS', stats);
+        .post('https://mirrorcontrol.herokuapp.com/api/stats', {
+          day: new Date().getDay(),
+          // type: req.body.type,
+          // duration: req.body.duration,
+          workoutDone: this.state.workoutDone,
+          week: this.state.week
+          //date: req.body.date
       })
-      .catch(error => {
-        //tja
+        .then(response => {
+          //('getted response')
+          //console.log(response.data)
+          //stats = data.data
+          let stats = response.data;
       })
-    },
+        .catch(error => {
+          //console.log(error)
+          //currentObj.output = error;
+      });
+  },
+    // postWorkoutifDone({ commit }) {
+    //   axios
+    //   .post('https://mirrorcontrol.herokuapp.com/api/stats')
+    //   .then(data => {
+    //     //console.log(data.data)
+    //     let stats = data.data
+    //     commit('SET_STATS', stats);
+    //   })
+    //   .catch(error => {
+    //     //tja
+    //   })
+    // },
     sendSocket() {
       this.state.videoStarted = false;
       this.state.socket.emit('SEND_STARTMIRROR', {

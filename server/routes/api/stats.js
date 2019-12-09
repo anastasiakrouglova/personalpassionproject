@@ -19,7 +19,8 @@ router.post('/', async (req, res) => {
         type: req.body.type,
         duration: req.body.duration,
         workoutDone: req.body.workoutDone,
-        date: req.body.date
+        date: req.body.date,
+        week: req.body.week
     });
     res.status(201).send();
 })

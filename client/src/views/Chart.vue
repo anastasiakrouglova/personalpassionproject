@@ -1,6 +1,6 @@
 <template>
   <div class="charts">
-    <p>GOOD JOB! Hier is jouw grafiek</p> 
+    <p>Well done! Here are some stats of your workout today</p> 
 
     <li class="days-container" v-for='daydb in doneDays' :key="daydb.id">  
       <span v-if="daydb.week === '2'">{{days[daydb.day -1]}}
@@ -9,26 +9,24 @@
       </span>
     </li>
 
+    <button @click="postWorkout()">WORKOUT POSTEN</button>
+
       <p>
         checkedboxvalue: {{checkBoxInputValues}}
       </p>
       <h2 class="week-title">this week</h2>
 
       <div class="week-container">
-
-
-        
-
           <div v-for="(n) in 7" :key="n">
-              <span class="weekday-currentday" v-if="dayActive[n -1] === true">
+
+              <span class="weekday-container" v-if="dayActive[n -1] === true">
                 {{days[n - 1]}} 
                 <img class="week-img" src="/assets/img/done.svg" alt="done">
               </span>
-              <span class="weekday-currentday" v-else>
-                {{days[n - 1]}}
+              <span class="weekday-container" v-else-if="dayActive[n -1] !== true">
+               {{days[n - 1]}}
                 <img class="week-img" src="/assets/img/notDone.svg" alt="done">
               </span>
-
         </div >
       </div>
 
@@ -76,28 +74,15 @@ export default {
     }
 
     //console.log(this.checkBoxInputValues[0]);
-
   },
   computed: {
   doneDays() {
     this.filterDays()
-    this.ShowOnce()
     this.flagChange();
     this.iDay()
     // where week = 1
     return this.$store.state.stats;
   },
-
-  // iDay(){
-  //   for(let i = 0; i < 7; i++){
-  //       return 
-  //   }
-  // }
-  // ShowValueOnce() {
-  //       return this.checkBoxInputValues.filter(function(myValue) {
-  //         return myValue
-  //       })
-  //   }
   },
   methods: {
     filterDays() {
@@ -108,38 +93,34 @@ export default {
     flagChange() {
       this.flag = true;
     },
-    ShowOnce() {
-        // return this.checkBoxInputValues.filter(function(myValue) {
-        //   return myValue
-        // })
+    postWorkout() {
+    this.$store.dispatch('postWorkoutifDone')
     },
     iDay() {
-    window.alert('blah')
     for (let n = 0; n<7; n++){
-      console.log('AAAAAAAAAAAAA CYCLUS' + n)
+      //console.log('AAAAAAAAAAAAA CYCLUS' + n)
       this.dayActive[n] = false;
       for (let i = 0; i < this.$store.state.stats.length; i++) {
-  //      console.log(this.$store.state.stats[n].day)
  
       if (this.$store.state.stats[i].week === '2'){
       if (this.$store.state.stats[i].workoutDone === 'true'){
         
         let zz=this.$store.state.stats[i].day
-        console.log('n=' + n + '  i=' + i  + ' day='+ zz)
+        //console.log('n=' + n + '  i=' + i  + ' day='+ zz)
         
         if(zz == n+1) {
           this.dayActive[n] = true;
-          console.log('bingo')
-          console.log(this.dayActive[n])
+          //console.log('bingo')
+          //console.log(this.dayActive[n])
         }
         //console.log(this.$store.state.stats[n].week)
     }
     }
     }
   }
-        console.log(this.dayActive)
+        //console.log(this.dayActive)
 //        this.dayActive = [true, true, false, false, false, false, true,]
-   console.log(this.dayActive)
+   //console.log(this.dayActive)
   }
 }
 }
