@@ -10,78 +10,36 @@
     </li>
 
       <p>
-        checkedboxvalue: {{checkedBoxInputValue}}
+        checkedboxvalue: {{checkBoxInputValues}}
       </p>
+      <h2 class="week-title">this week</h2>
 
       <div class="week-container">
-        <span class="weekday-container" v-if="days[0] === checkedBoxInputValue">
-          {{days[0]}}
-          <input checked type="checkbox">
-        </span>
-        <span class="weekday-container" v-else>
-          {{days[0]}}
-          <input type="checkbox">
-        </span>
 
-        <span class="weekday-container" v-if="days[1] === checkedBoxInputValue">
-          {{days[1]}}
-          <input checked type="checkbox">
-        </span>
-        <span class="weekday-container" v-else>
-          {{days[1]}}
-          <input type="checkbox">
-        </span>
 
-        <span class="weekday-container" v-if="days[2] === checkedBoxInputValue">{{days[2]}}
-          <input checked type="checkbox">
-        </span>
-        <span class="weekday-container" v-else>
-          {{days[2]}}
-          <input type="checkbox">
-        </span>
+        
 
-        <span class="weekday-container" v-if="days[3] === checkedBoxInputValue">{{days[3]}}
-          <input checked type="checkbox">
-        </span>
-        <span class="weekday-container" v-else>
-          {{days[3]}}
-          <input type="checkbox">
-        </span>
+          <div v-for="(n) in 7" :key="n">
+              <span class="weekday-currentday" v-if="dayActive[n -1] === true">
+                {{days[n - 1]}} 
+                <img class="week-img" src="/assets/img/done.svg" alt="done">
+              </span>
+              <span class="weekday-currentday" v-else>
+                {{days[n - 1]}}
+                <img class="week-img" src="/assets/img/notDone.svg" alt="done">
+              </span>
 
-        <span class="weekday-container" v-if="days[4] === checkedBoxInputValue">{{days[4]}}
-          <input checked type="checkbox">
-        </span>
-        <span class="weekday-container" v-else>
-          {{days[4]}}
-          <input type="checkbox">
-        </span>
-
-        <span class="weekday-container" v-if="days[5] === checkedBoxInputValue">{{days[5]}}
-          <input checked type="checkbox">
-        </span>
-        <span class="weekday-container" v-else>
-          {{days[5]}}
-          <input type="checkbox">
-        </span>
-
-        <span class="weekday-container" v-if="days[6] === checkedBoxInputValue">{{days[6]}}
-          <input checked type="checkbox">
-        </span>
-        <span class="weekday-container" v-else>
-          {{days[6]}}
-          <input type="checkbox">
-        </span>
+        </div >
       </div>
-      <br>
-      <br>
-    <router-link to="/"><span class="button-start">ga terug naar oefeningen</span></router-link>
+
+
     <trend
     :data="[0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0]"
     :gradient="['#6fa8dc', '#42b983', '#2c3e50']"
     auto-draw
     smooth>
   </trend>
-  <img src="/assets/img/done.gif" alt="test">
+  <!-- <img src="/assets/img/done.gif" alt="test"> -->
   </div>
 </template>
 
@@ -96,10 +54,12 @@ export default {
   data () {
     return {
       loading: 'getLoadingState',
-      days: ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'],
+      days: [ 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'],
+      dayActive: [false, false, false, false, false, false, false,],
       todayNumber: new Date().getDay(), // todaynumber is een cijfer van 0-7
       currentday: null,
-      checkedBoxInputValue: ''
+      checkBoxInputValues: [],
+      flag: false
     }
   },
   mounted() {
@@ -109,22 +69,35 @@ export default {
     if (this.$store.workoutDone === true) {
     }
 
-    console.log(this.days[0]);
+    //console.log(this.currentday)
 
-
-    for(let i = 0; i < 2; i++){
-        this.checkedBoxInputValue = this.$refs.checkedBox[i].value
-        console.log(this.checkedBoxInputValue);
-        //console.log(this.monday);
+    for(let i = 0; i < this.$refs.checkedBox.length; i++){
+        this.checkBoxInputValues.push(this.$refs.checkedBox[i].value)
     }
+
+    //console.log(this.checkBoxInputValues[0]);
+
   },
   computed: {
   doneDays() {
     this.filterDays()
     this.ShowOnce()
+    this.flagChange();
+    this.iDay()
     // where week = 1
     return this.$store.state.stats;
-  }
+  },
+
+  // iDay(){
+  //   for(let i = 0; i < 7; i++){
+  //       return 
+  //   }
+  // }
+  // ShowValueOnce() {
+  //       return this.checkBoxInputValues.filter(function(myValue) {
+  //         return myValue
+  //       })
+  //   }
   },
   methods: {
     filterDays() {
@@ -132,13 +105,45 @@ export default {
         return -(y.day - x.day);
       });
     },
-    ShowOnce(array, value) {
-
+    flagChange() {
+      this.flag = true;
+    },
+    ShowOnce() {
+        // return this.checkBoxInputValues.filter(function(myValue) {
+        //   return myValue
+        // })
+    },
+    iDay() {
+    window.alert('blah')
+    for (let n = 0; n<7; n++){
+      console.log('AAAAAAAAAAAAA CYCLUS' + n)
+      this.dayActive[n] = false;
+      for (let i = 0; i < this.$store.state.stats.length; i++) {
+  //      console.log(this.$store.state.stats[n].day)
+ 
+      if (this.$store.state.stats[i].week === '2'){
+      if (this.$store.state.stats[i].workoutDone === 'true'){
+        
+        let zz=this.$store.state.stats[i].day
+        console.log('n=' + n + '  i=' + i  + ' day='+ zz)
+        
+        if(zz == n+1) {
+          this.dayActive[n] = true;
+          console.log('bingo')
+          console.log(this.dayActive[n])
+        }
+        //console.log(this.$store.state.stats[n].week)
+    }
+    }
     }
   }
+        console.log(this.dayActive)
+//        this.dayActive = [true, true, false, false, false, false, true,]
+   console.log(this.dayActive)
+  }
+}
 }
 </script>
-
 
 <style >
 .charts {
@@ -158,6 +163,10 @@ export default {
 
 .week-container {
   display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  font-size: 0.8rem;
+  /* font-weight: bold; */
 }
 .weekday-container {
   display: flex;
@@ -165,4 +174,25 @@ export default {
   width: 2rem;
   padding: 1rem;
 }
+
+.week-title {
+  font-size: 1rem;
+  margin-bottom: 0rem;
+  text-align: left;
+  padding-left: 1rem;
+}
+
+.week-img {
+  padding-bottom: 0.1rem;
+}
+
+.weekday-currentday {
+    display: flex;
+  flex-direction: column-reverse;
+  width: 2rem;
+  padding: 1rem;
+  color: red;
+  font-weight: bold;
+}
+
 </style>
