@@ -21,17 +21,17 @@ const io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
     console.log(socket.id)
-    console.log('lalalallalala')
 
+    // MIRROR VOLGENDE PAGINA
     socket.on('SEND_STARTMIRROR', function (data) {
         io.sockets.emit('startplay', data);
     });
 
-        // BLUETOOTH DATA VERZENDEN
-        socket.on('SEND_BLUETOOTH', function (data) {
-            //console.log('lalala')
-            io.sockets.emit('sendbluetooth', data);
-        });
+    // BLUETOOTH DATA VERZENDEN
+    socket.on('SEND_BLUETOOTH', function (data) {
+        //console.log('lalala')
+        io.sockets.emit('sendbluetooth', data);
+    });
 
     // VIDEO IS AAN HET AFSPELEN
     socket.on('SEND_PLAYED', function (data) {

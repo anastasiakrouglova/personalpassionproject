@@ -27,6 +27,7 @@ export default {
     }
   },
   created() {
+    //this.socket = io("http://localhost:3000");
     this.socket = io("https://mirrorcontrol.herokuapp.com/");
     //console.log(this.socket);
   },
@@ -47,7 +48,7 @@ export default {
         this.heartRates.push(heartRateMeasurement.heartRate);
         this.$store.dispatch('sendBluetoothSocket');
       });
-      this.$store.dispatch('sendBluetoothSocket');
+      //this.$store.dispatch('sendBluetoothSocket');
     }
   }
 }

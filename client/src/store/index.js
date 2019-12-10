@@ -150,9 +150,9 @@ export default new Vuex.Store({
       let heartRateMeasurement = heartRateSensor.parseHeartRate(event.target.value);
       //console.log('socket verzonden')
       //console.log('dit is mesurement' + heartRateMeasurement.heartRate)
-      this.state.heartRate = heartRateMeasurement.heartRate
+
       this.state.socket.emit('SEND_BLUETOOTH', {
-        heartRate: this.state.heartRate
+        heartRate: heartRateMeasurement.heartRate
       });
     }
   }
