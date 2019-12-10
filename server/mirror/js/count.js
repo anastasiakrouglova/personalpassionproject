@@ -1,6 +1,4 @@
 {
-
-    
     let $count = document.querySelector('#count');
 
     

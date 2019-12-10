@@ -42,33 +42,23 @@ export default {
       this.$store.dispatch('playVideoSocket');
       this.$refs.videoTraining.play();
     if (this.isPlaying === false) {
-      //console.log(this.isPlaying);
         this.isPlaying = true;
     } else {
-      //console.log(this.isPlaying);
       this.isPlaying = false;
     }
   },
   pauze () {
-    //console.log(this.$refs.videoTraining);
     this.$store.dispatch('pauzeVideoSocket');
     this.$refs.videoTraining.pause();
     if (this.isPlaying === false) {
-      //console.log(this.isPlaying);
         this.isPlaying = true;
     } else {
-      //console.log(this.isPlaying);
       this.isPlaying = false;
     }
   },
   onPlayerEnded() {
-    //console.log('video is ten einde')
-    //console.log(this.$route.params.id);
-    //console.log(this.$store.state.workoutDone)
     this.$store.state.workoutDone = 'true';
-    //console.log(this.$store.state.workoutDone)
     this.$store.dispatch('postWorkoutifDone')
-
     this.$router.push('/chart');
   }
 }

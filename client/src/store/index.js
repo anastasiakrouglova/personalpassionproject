@@ -22,6 +22,8 @@ export default new Vuex.Store({
     socket: io('https://mirrorcontrol.herokuapp.com/'),
     videoStarted: false,
     playing: true,
+    heartRates: [],
+    heartRate: true,
     workout: 'video mag afgespeeld worden',
     workouts: [],
     stats: [],
@@ -143,5 +145,15 @@ export default new Vuex.Store({
         playPauzed: this.state.playing
       });
     },
+    sendBluetoothSocket() {
+      //sendBluetooth
+      let heartRateMeasurement = heartRateSensor.parseHeartRate(event.target.value);
+      //console.log('socket verzonden')
+      //console.log('dit is mesurement' + heartRateMeasurement.heartRate)
+      this.state.heartRate = heartRateMeasurement.heartRate
+      this.state.socket.emit('SEND_BLUETOOTH', {
+        heartRate: this.state.heartRate
+      });
+    }
   }
 });

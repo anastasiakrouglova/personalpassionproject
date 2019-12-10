@@ -15,29 +15,35 @@ const server = app.listen(port, () => console.log('server started on port', port
 
 const io = require('socket.io')(server);
 //io.set('origins', 'http://localhost:3000/api/workouts');
-const videoState = {
-    videoStarted: false
-}
+// const videoState = {
+//     videoStarted: false
+// }
 
 io.on('connection', function(socket) {
     console.log(socket.id)
+    console.log('lalalallalala')
+
     socket.on('SEND_STARTMIRROR', function (data) {
-        //videoStarted = true;
-        //io.emit('PLAY', data)
         io.sockets.emit('startplay', data);
     });
 
+        // BLUETOOTH DATA VERZENDEN
+        socket.on('SEND_BLUETOOTH', function (data) {
+            //console.log('lalala')
+            io.sockets.emit('sendbluetooth', data);
+        });
+
     // VIDEO IS AAN HET AFSPELEN
     socket.on('SEND_PLAYED', function (data) {
-        //videoStarted = true;
         io.sockets.emit('playvideo', data);
     });
 
     // VIDEO IS GEPAUSEERD
     socket.on('SEND_PAUZED', function (data) {
-        //videoStarted = true;
         io.sockets.emit('pauzevideo', data);
     });
+
+
 });
 
 // Middleware
