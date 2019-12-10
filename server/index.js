@@ -43,7 +43,10 @@ io.on('connection', function(socket) {
         io.sockets.emit('pauzevideo', data);
     });
 
-
+    // VIDEO IS GEPAUSEERD
+    socket.on('SEND_VIDEOSRC', function (data) {
+        io.sockets.emit('videosrc', data);
+    });
 });
 
 // Middleware

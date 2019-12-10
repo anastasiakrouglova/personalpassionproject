@@ -6,8 +6,6 @@ import io from 'socket.io-client';
 import axios from "axios";
 import "../bluetooth/heartRateSensor.js"
 
-//console.log(window.heartRateSensor);
-
 Vue.use(Vuex, axios);
 //Vue.use(VuePageTransition);
 
@@ -20,6 +18,7 @@ Vue.use(new VueSocketIO({
 export default new Vuex.Store({
   state: {
     socket: io('https://mirrorcontrol.herokuapp.com/'),
+    videoSrc: '',
     videoStarted: false,
     playing: true,
     heartRates: [],
@@ -146,14 +145,16 @@ export default new Vuex.Store({
       });
     },
     sendBluetoothSocket() {
-      //sendBluetooth
       let heartRateMeasurement = heartRateSensor.parseHeartRate(event.target.value);
-      //console.log('socket verzonden')
-      //console.log('dit is mesurement' + heartRateMeasurement.heartRate)
-
       this.state.socket.emit('SEND_BLUETOOTH', {
         heartRate: heartRateMeasurement.heartRate
       });
+    },
+    sendVideoId() {
+      //console.log('dit is videoSrc:' + this.state.videoSrc);
+      this.state.socket.emit('SEND_VIDEOSRC', {
+        videoSrc: this.state.videoSrc
+      })
     }
   }
 });

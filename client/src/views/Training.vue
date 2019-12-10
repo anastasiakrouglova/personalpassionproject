@@ -34,8 +34,13 @@ export default {
     }
   },
   created() {
+    //this.socket = io("http://localhost:3000");
     this.socket = io("https://mirrorcontrol.herokuapp.com/");
-    //console.log(this.socket);
+  },
+  mounted() {
+    this.$store.state.videoSrc = this.$refs.videoTraining.src;
+    //let videoSrc = this.$refs.videoTraining.src;
+    this.$store.dispatch('sendVideoId');
   },
   methods: {
     play () {
