@@ -1,7 +1,7 @@
 <template>
   <div class="training-container">
     <router-link class="arrowback" to="/"><ArrowBackIcon class="arrowback-training" w="30" h="30" /></router-link>
-    <video class="video-workout" ref="videoTraining" @ended="onPlayerEnded()" autoplay :src="'/assets/video/' + this.$store.state.workouts[$route.params.id - 1].img + '.mp4'" width=300></video>
+    <video muted class="video-workout" ref="videoTraining" @ended="onPlayerEnded()" autoplay :src="'/assets/video/' + this.$store.state.workouts[$route.params.id - 1].img + '.mp4'" width=300></video>
     <div>
       <span  @click="play()"><PlayIcon  class="play-control-item play" v-show="!isPlaying" w="30" h="30"/></span>
       <span @click="pauze()"><PauseIcon class="play-control-item pauze" v-show="isPlaying" w="30" h="30"/></span>
@@ -37,11 +37,6 @@ export default {
     //this.socket = io("http://localhost:3000");
     this.socket = io("https://mirrorcontrol.herokuapp.com/");
   },
-  // mounted() {
-  //   //this.$store.state.videoSrc = this.$refs.videoTraining.src;
-  //   //let videoSrc = this.$refs.videoTraining.src;
-  //   //this.$store.dispatch('sendVideoId');
-  // },
   methods: {
     play () {
       this.$store.dispatch('playVideoSocket');

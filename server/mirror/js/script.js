@@ -36,7 +36,7 @@
         socket = io.connect('https://mirrorcontrol.herokuapp.com');
 
         socket.on(`startplay`, (data) => {
-            //console.log(data.videoSrc);
+            //console.log('lalalalallala:' + data.videoSrc);
             startVideo(data.videoSrc);
         });
         

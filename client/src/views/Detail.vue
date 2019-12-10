@@ -48,17 +48,14 @@ export default {
     }
   },
   created() {
-    //this.socket = io("http://localhost:3000");
-    this.socket = io("https://mirrorcontrol.herokuapp.com/");
-    //console.log(this.socket);
-    //console.log(this.$store.state.workouts[this.$route.params.id - 1].img);
-    this.$store.state.videoSrc = this.$store.state.workouts[this.$route.params.id - 1].img
-    this.$store.dispatch('sendVideoId');
+    this.socket = io("http://localhost:3000");
+    //this.socket = io("https://mirrorcontrol.herokuapp.com/");
   },
   methods: {
     socketToevoegen() {
+      this.$store.state.videoSrc = this.$store.state.workouts[this.$route.params.id - 1].img
+      //console.log(this.$store.state.videoSrc);
       this.$store.dispatch('sendSocket');
-      //this.$store.dispatch('sendSocket');
     }
   }
 }

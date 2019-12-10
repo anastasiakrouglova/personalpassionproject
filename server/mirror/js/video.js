@@ -1,7 +1,7 @@
 {
     let socket;
-  const $video = document.querySelector('video');
-  const $bpm = document.querySelector('#statusText');
+    const $video = document.querySelector('video');
+    const $bpm = document.querySelector('#statusText');
 
     async function findData() {
         const response = await fetch('https://mirrorcontrol.herokuapp.com/api/workouts');
@@ -11,8 +11,6 @@
 
   const init = () => {
     $video.src = "../assets/video/" + localStorage.getItem("storageVideo") + ".mp4";
-
-    console.log($videosrc);
 
     findData();
     socket = io.connect('https://mirrorcontrol.herokuapp.com');

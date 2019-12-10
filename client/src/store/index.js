@@ -75,7 +75,6 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    //methods
     playVideo(videoID) {
       store.data.workouts.push(videoID);
     },
@@ -83,29 +82,24 @@ export default new Vuex.Store({
       axios
         .get('https://mirrorcontrol.herokuapp.com/api/workouts')
         .then(data => {
-          //console.log(data.data)
           let workouts = data.data
           commit('SET_WORKOUTS', workouts)
         })
         .catch(error => {
-          //tja
         })
     },
     loadStats({ commit }) {
       axios
         .get('https://mirrorcontrol.herokuapp.com/api/stats')
         .then(data => {
-          //console.log(data.data)
           let stats = data.data
           commit('SET_STATS', stats)
           
         })
         .catch(error => {
-          //tja
         })
     },
     postWorkoutifDone({ commit }) {
-      //this.state.workoutDone = 'true';
       axios
         .post('https://mirrorcontrol.herokuapp.com/api/stats', {
           day: new Date().getDay(),
@@ -117,13 +111,9 @@ export default new Vuex.Store({
       })
         .then(response => {
           ('getted response')
-          //console.log(response.data)
-          //stats = data.data
           let stats = response.data;
       })
         .catch(error => {
-          //console.log(error)
-          //currentObj.output = error;
       });
   },
     sendSocket() {
@@ -151,11 +141,5 @@ export default new Vuex.Store({
         heartRate: heartRateMeasurement.heartRate
       });
     },
-    sendVideoId() {
-      console.log('dit is videoSrc:' + this.state.videoSrc);
-      this.state.socket.emit('SEND_VIDEOSRC', {
-        videoSrc: this.state.videoSrc
-      })
-    }
   }
 });
