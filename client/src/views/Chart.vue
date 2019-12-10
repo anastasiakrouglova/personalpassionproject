@@ -2,34 +2,15 @@
   <div class="charts">
     <p>Well done! Here are some stats of your workout today</p> 
 
-    <li class="days-container" v-for='daydb in doneDays' :key="daydb.id">  
-      <span v-if="daydb.week === '2'">{{days[daydb.day -1]}}
-        <input ref="checkedBox" v-if="daydb.workoutDone === 'true'" checked type="checkbox" :name="days[daydb.day -1]" :value="days[daydb.day -1]">
-        <input ref="uncheckedBox" v-if="daydb.workoutDone === 'false'" type="checkbox" :name="days[daydb.day -1]" :value="days[daydb.day -1]">
-      </span>
+    <li class="days-container" v-for='dayObject in doneDays' :key="dayObject.label">  
     </li>
 
-    <button @click="postWorkout()">WORKOUT POSTEN</button>
-
-      <p>
-        checkedboxvalue: {{checkBoxInputValues}}
-      </p>
-      <h2 class="week-title">this week</h2>
-
-      <div class="week-container">
-          <div v-for="(n) in 7" :key="n">
-
-              <span class="weekday-container" v-if="dayActive[n -1] === true">
-                {{days[n - 1]}} 
-                <img class="week-img" src="/assets/img/done.svg" alt="done">
-              </span>
-              <span class="weekday-container" v-else-if="dayActive[n -1] !== true">
-               {{days[n - 1]}}
-                <img class="week-img" src="/assets/img/notDone.svg" alt="done">
-              </span>
-        </div >
-      </div>
-
+    <h2 class="week-title">this week</h2>
+    <div class="week-container">
+        <div v-for="dayObject in this.$store.state.dayObjects" :key="dayObject.label">
+          <WeekDay :dayObject="dayObject" />
+      </div >
+    </div>
 
     <trend
     :data="[0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0]"
@@ -43,85 +24,59 @@
 
 <script>
 import Trend from "vuetrend"
+import WeekDay from '../components/WeekDay.vue'
 
 export default {
   name: "jumps",
   components: {
-    Trend
+    Trend,
+    WeekDay
   },
   data () {
     return {
       loading: 'getLoadingState',
-      days: [ 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'],
-      dayActive: [false, false, false, false, false, false, false,],
-      todayNumber: new Date().getDay(), // todaynumber is een cijfer van 0-7
-      currentday: null,
-      checkBoxInputValues: [],
-      flag: false
     }
   },
-  mounted() {
-    let today = this.days[this.todayNumber - 1] // Vandaag in cijfers -1 omdat array van 0 begint
-    //this.currentday = today
-    this.currentday = this.todayNumber
-    if (this.$store.workoutDone === true) {
-    }
 
-    //console.log(this.currentday)
-
-    for(let i = 0; i < this.$refs.checkedBox.length; i++){
-        this.checkBoxInputValues.push(this.$refs.checkedBox[i].value)
-    }
-
-    //console.log(this.checkBoxInputValues[0]);
-  },
   computed: {
-  doneDays() {
-    this.filterDays()
-    this.flagChange();
-    this.iDay()
-    // where week = 1
-    return this.$store.state.stats;
+    doneDays() {
+      this.filterDays()
+      this.iDay()
+      return this.$store.state.stats;
+    },
+    today() {
+      let dayNr = new Date().getDay() - 1;
+      if (dayNr < 0) dayNr = 6;
+      return this.$store.state.dayObjects[dayNr];
+    }
   },
-  },
+
   methods: {
     filterDays() {
       this.$store.state.stats.sort(function(x, y) {
         return -(y.day - x.day);
       });
     },
-    flagChange() {
-      this.flag = true;
-    },
     postWorkout() {
     this.$store.dispatch('postWorkoutifDone')
     },
     iDay() {
     for (let n = 0; n<7; n++){
-      //console.log('AAAAAAAAAAAAA CYCLUS' + n)
-      this.dayActive[n] = false;
+      this.$store.state.dayObjects[n].active = false;
       for (let i = 0; i < this.$store.state.stats.length; i++) {
  
       if (this.$store.state.stats[i].week === '2'){
-      if (this.$store.state.stats[i].workoutDone === 'true'){
-        
-        let zz=this.$store.state.stats[i].day
-        //console.log('n=' + n + '  i=' + i  + ' day='+ zz)
-        
-        if(zz == n+1) {
-          this.dayActive[n] = true;
-          //console.log('bingo')
-          //console.log(this.dayActive[n])
+        if (this.$store.state.stats[i].workoutDone === 'true'){
+          let zz=this.$store.state.stats[i].day
+          
+          if(zz == n+1) {
+            this.$store.state.dayObjects[n].active = true;
+          }
         }
-        //console.log(this.$store.state.stats[n].week)
+       }
+      }
     }
     }
-    }
-  }
-        //console.log(this.dayActive)
-//        this.dayActive = [true, true, false, false, false, false, true,]
-   //console.log(this.dayActive)
-  }
 }
 }
 </script>
@@ -149,12 +104,7 @@ export default {
   font-size: 0.8rem;
   /* font-weight: bold; */
 }
-.weekday-container {
-  display: flex;
-  flex-direction: column-reverse;
-  width: 2rem;
-  padding: 1rem;
-}
+
 
 .week-title {
   font-size: 1rem;
@@ -167,13 +117,5 @@ export default {
   padding-bottom: 0.1rem;
 }
 
-.weekday-currentday {
-    display: flex;
-  flex-direction: column-reverse;
-  width: 2rem;
-  padding: 1rem;
-  color: red;
-  font-weight: bold;
-}
 
 </style>

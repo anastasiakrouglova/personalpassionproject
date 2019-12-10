@@ -4,6 +4,9 @@ import Vuex from "vuex";
 import VueSocketIO from 'vue-socket.io';
 import io from 'socket.io-client';
 import axios from "axios";
+import "../bluetooth/heartRateSensor.js"
+
+//console.log(window.heartRateSensor);
 
 Vue.use(Vuex, axios);
 //Vue.use(VuePageTransition);
@@ -22,9 +25,45 @@ export default new Vuex.Store({
     workout: 'video mag afgespeeld worden',
     workouts: [],
     stats: [],
-
     workoutDone: 'false',
-    week: '2'
+    week: '2',
+    dayObjects: [
+      {
+        label: 'Mon',
+        active: false,
+        index: 0
+      },
+      {
+        label: 'Tues',
+        active: true,
+        index: 1
+      },
+      {
+        label: 'Wed',
+        active: false,
+        index: 2
+      },
+      {
+        label: 'Thurs',
+        active: false,
+        index: 3
+      },
+      {
+        label: 'Fri',
+        active: false,
+        index: 4
+      },
+      {
+        label: 'Sat',
+        active: false,
+        index: 5
+      },
+      {
+        label: 'Sun',
+        active: false,
+        index: 6
+      },
+    ],
   },
   mutations: {
     SET_WORKOUTS(state, workouts) {

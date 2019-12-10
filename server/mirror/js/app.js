@@ -8,7 +8,7 @@ statusText.addEventListener('click', function() {
   heartRateSensor.connect()
   .then(() => heartRateSensor.startNotificationsHeartRateMeasurement().then(handleHeartRateMeasurement))
   .catch(error => {
-    statusText.textContent = 'oeps, geen toestel gevonden';
+    statusText.textContent = 'oeps';
   });
 });
 

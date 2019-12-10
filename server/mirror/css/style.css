@@ -5,6 +5,7 @@ html {
     box-sizing: border-box;
     background-color: black;
     color: white;
+    font-family: 'SF Compact Display';
 }
 
 *{
@@ -27,19 +28,31 @@ body {
 
 }
 
-
-/* @font-face {
-    font-family: 'bebas_neueregular';
-    src: url('../assets/typo/bebasneue-webfont.woff2') format('woff2'),
-         url('../assets/typo/bebasneue-webfont.woff') format('woff');
+@font-face {
+    font-family: 'SF Compact Display';
+    src: url('SFCompactDisplay-Regular.woff2') format('woff2'),
+        url('SFCompactDisplay-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-} */
+}
 
-/* h1 {
-    //font-family: 'bebas_neueregular';
-    font-size: 4rem;
-} */
+@font-face {
+    font-family: 'SF Compact Display';
+    src: url('SFCompactDisplay-Medium.woff2') format('woff2'),
+        url('SFCompactDisplay-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SFCompact Text';
+    src: url('SFCompactText-Bold.woff2') format('woff2'),
+        url('SFCompactText-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+
 
 
 #count {
@@ -82,3 +95,59 @@ body {
     height: 100%;
     display: block;
   } */
+
+
+  .link-adres {
+      font-size: 2rem;
+      background-color: white;
+      color: black;
+      padding: 0.2rem 1rem;
+      font-weight: bold;
+  }
+
+
+  .mirror-container {
+      display: flex;
+      justify-content: space-between;
+  }
+
+
+  .fit-title {
+      font-size: 2.2rem;
+      background-color: white;
+      color: black;
+      padding: 0.2rem 1rem;
+      font-weight: bold;
+      margin-top: -11rem;
+  }
+
+
+
+  .eerste-surfnaar {
+      font-size: 2.7rem;
+      font-weight: bold;
+      letter-spacing: 0.1rem;
+      text-transform: uppercase;
+      padding-bottom: 0.5rem;
+  }
+
+
+  .tweede-surfnaar {
+    margin-top: 1rem;
+    font-size: 1.7rem;
+
+    padding-bottom: 0.5rem;
+    letter-spacing: 0.1rem;
+    opacity: 0.8;
+    font-weight: bold;
+}
+
+
+  .link-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+      margin-top: 7rem;
+      margin-bottom: -15rem;
+      margin-left: -20rem;
+  }

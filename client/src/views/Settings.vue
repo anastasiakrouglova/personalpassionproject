@@ -18,22 +18,31 @@ export default {
   name: "jumps",
   components: {
     //heartRateSensor
+    
   },
   data () {
     return {
-        heartRates: [38, 29, 45]
+        //heartRates: [38, 29, 45],
+        heartRates: []
     }
   },
   methods: {
 statusText() {
-    //console.log('lalala')
-    this.$refs.bpm.textContent = 'Searching...';
-    //this.data;
-    //heartRateSensor.connect()
-    //.then(() => heartRateSensor.startNotificationsHeartRateMeasurement().then(handleHeartRateMeasurement))
-    //.catch(error => {
-    //statusText.textContent = 'oeps, geen toestel gevonden';
-  //});
+  // this.$refs.bpm.textContent = 'Searching...';
+  
+  heartRateSensor.connect()
+  .then(() => heartRateSensor.startNotificationsHeartRateMeasurement().then(this.handleHeartRateMeasurement))
+  .catch(error => {
+    this.$refs.bpm.textContent = 'oeps';
+  });
+},
+handleHeartRateMeasurement(heartRateMeasurement) {
+  //console.log('in functie handle');
+  heartRateMeasurement.addEventListener('characteristicvaluechanged', event => {
+    var heartRateMeasurement = heartRateSensor.parseHeartRate(event.target.value);
+    this.$refs.bpm.innerHTML = heartRateMeasurement.heartRate + ' &#x2764;';
+    this.heartRates.push(heartRateMeasurement.heartRate);
+  });
 }
 
   }
