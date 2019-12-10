@@ -1,8 +1,6 @@
 {
     let $count = document.querySelector('#count');
 
-    
-    
     const counter = () => {
         let countDown = 5
 
@@ -16,8 +14,9 @@
             }, 1000)   
     }
 
-
-  const init = () => {
+const init = () => {
+    localStorage.getItem("storageVideo");
+    //console.log(localStorage.getItem("storageVideo"));
     counter()
   };
   init();

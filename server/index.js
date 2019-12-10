@@ -21,11 +21,17 @@ const io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
     console.log(socket.id)
+    console.log('lalalal');
 
     // MIRROR VOLGENDE PAGINA
     socket.on('SEND_STARTMIRROR', function (data) {
         io.sockets.emit('startplay', data);
     });
+
+    // // VIDEOID VERZENDEN
+    // socket.on('SEND_VIDEOSRC', function (data) {
+    //     io.sockets.emit('videosrc', data);
+    // });
 
     // BLUETOOTH DATA VERZENDEN
     socket.on('SEND_BLUETOOTH', function (data) {
@@ -41,11 +47,6 @@ io.on('connection', function(socket) {
     // VIDEO IS GEPAUSEERD
     socket.on('SEND_PAUZED', function (data) {
         io.sockets.emit('pauzevideo', data);
-    });
-
-    // VIDEO IS GEPAUSEERD
-    socket.on('SEND_VIDEOSRC', function (data) {
-        io.sockets.emit('videosrc', data);
     });
 });
 

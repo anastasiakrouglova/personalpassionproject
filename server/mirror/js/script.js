@@ -24,7 +24,9 @@
         console.log(JSON.stringify(myJson));
     }
     
-    startVideo = () => {
+    startVideo = (videoSrc) => {
+        console.log(videoSrc);
+        localStorage.setItem("storageVideo",videoSrc);
         window.location = "aftellen.html";
     }
 
@@ -34,8 +36,8 @@
         socket = io.connect('https://mirrorcontrol.herokuapp.com');
 
         socket.on(`startplay`, (data) => {
-            console.log(data);
-            startVideo();
+            //console.log(data.videoSrc);
+            startVideo(data.videoSrc);
         });
         
 

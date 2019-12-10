@@ -129,7 +129,8 @@ export default new Vuex.Store({
     sendSocket() {
       this.state.videoStarted = false;
       this.state.socket.emit('SEND_STARTMIRROR', {
-        videoStarted: this.state.videoStarted
+        videoStarted: this.state.videoStarted,
+        videoSrc: this.state.videoSrc
       });
     },
     pauzeVideoSocket() {
@@ -151,7 +152,7 @@ export default new Vuex.Store({
       });
     },
     sendVideoId() {
-      //console.log('dit is videoSrc:' + this.state.videoSrc);
+      console.log('dit is videoSrc:' + this.state.videoSrc);
       this.state.socket.emit('SEND_VIDEOSRC', {
         videoSrc: this.state.videoSrc
       })

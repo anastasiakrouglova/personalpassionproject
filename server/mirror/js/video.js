@@ -10,12 +10,12 @@
     }
 
   const init = () => {
-      findData();
+    $video.src = "../assets/video/" + localStorage.getItem("storageVideo") + ".mp4";
+
+    console.log($videosrc);
+
+    findData();
     socket = io.connect('https://mirrorcontrol.herokuapp.com');
-    
-    socket.on(`videosrc`, (data) => {
-      console.log('dit is videoID:' + data);
-    });
 
     socket.on(`playvideo`, (data) => {
         console.log(data);
@@ -30,9 +30,6 @@
         console.log('dit is je hartslag ' + data.heartRate);
         $bpm.innerHTML = data.heartRate
       })
-    
-    
-      
   };
   init();
 }
