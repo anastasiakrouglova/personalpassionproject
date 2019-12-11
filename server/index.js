@@ -10,6 +10,8 @@ const http = require('http').Server(app);
 
 const workouts = require('./routes/api/workouts');
 const stats = require('./routes/api/stats');
+const heartRates = require('./routes/api/heartRates');
+
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => console.log('server started on port', port));
 
@@ -59,10 +61,14 @@ app.use(bodyParser.json());
 app.use(cors({credentials: true, origin: '*' }));
 app.use('/api/workouts', workouts);
 app.use('/api/stats', stats);
+app.use('/api/heartRates', heartRates);
 
 app.use('/api/workouts', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
 });
 app.use('/api/stats', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+});
+app.use('/api/heartRates', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
 });

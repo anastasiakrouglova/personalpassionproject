@@ -3,7 +3,9 @@
     <router-link class="arrowback" to="/"><ArrowBackIcon class="arrowback-training" w="30" h="30" /></router-link>
 
     <h1>{{this.$store.state.workouts[$route.params.id - 1].title}} </h1>
-    <video muted class="video-workout" ref="videoTraining" @ended="onPlayerEnded()"  @canplay="onPlayerStarted()" autoplay :src="'/assets/video/' + this.$store.state.workouts[$route.params.id - 1].img + '.mp4'" width=300></video>
+    <span class="hidden">
+    <video muted class="video-workout" ref="videoTraining" @ended="onPlayerEnded()"  @canplay="onPlayerStarted()" autoplay :src="'/assets/video/' + this.$store.state.workouts[$route.params.id - 1].img + '.mp4'" width=100></video>
+    </span>
     <div @click="false" @drag="false">
       <circle-slider v-model="timeLeft"
             :min="0"
@@ -171,5 +173,9 @@ export default {
 .training-container {
   /* background-color: black; */
   height: 100%;
+}
+
+.hidden {
+  display: none;
 }
 </style>

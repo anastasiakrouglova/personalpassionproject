@@ -94,6 +94,8 @@ export default {
 
   .detail {
     height: 100vh;
+    background-color: black;
+    z-index: 1;
   }
 
   .img-detail {

@@ -27,6 +27,7 @@ export default new Vuex.Store({
     workout: 'video mag afgespeeld worden',
     workouts: [],
     stats: [],
+    heartRates: [],
     workoutDone: 'false',
     week: '2',
     dayObjects: [
@@ -73,6 +74,9 @@ export default new Vuex.Store({
     },
     SET_STATS(state, stats) {
       state.stats = stats;
+    },
+    SET_HEARTRATE(state, heartRates) {
+      state.heartRates = heartRates;
     }
   },
   actions: {
@@ -96,6 +100,17 @@ export default new Vuex.Store({
           let stats = data.data
           commit('SET_STATS', stats)
           
+        })
+        .catch(error => {
+        })
+    },
+    loadHeartRate({ commit }) {
+      axios
+        .get('https://mirrorcontrol.herokuapp.com/api/heartRates')
+        .then(data => {
+          let heartRates = data.data
+          commit('SET_HEARTRATE', heartRates)
+          //console.log(heartRates)
         })
         .catch(error => {
         })
@@ -143,7 +158,7 @@ export default new Vuex.Store({
       });
     },
     stopTrainingSocket() {
-      console.log('in stoptraining')
+      //console.log('in stoptraining')
       this.state.stop = true;
       this.state.socket.emit('SEND_STOP', {
         stopVideo: this.state.stop

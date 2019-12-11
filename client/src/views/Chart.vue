@@ -5,13 +5,15 @@
     <li class="days-container" v-for='dayObject in doneDays' :key="dayObject.label">  
     </li>
 
+    <p>{{latestHeartRates}}</p>
+
     <h2 class="week-title">this week</h2>
     <div class="week-container">
         <div v-for="dayObject in this.$store.state.dayObjects" :key="dayObject.label">
           <WeekDay :dayObject="dayObject" />
       </div >
     </div>
-
+    <h2 class="week-title">BPM in your last workout</h2>
     <trend
     :data="[0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0]"
     :gradient="['#6fa8dc', '#42b983', '#2c3e50']"
@@ -43,6 +45,9 @@ export default {
       this.filterDays()
       this.iDay()
       return this.$store.state.stats;
+    },
+    latestHeartRates() {
+      return this.$store.state.heartRates;
     },
     today() {
       let dayNr = new Date().getDay() - 1;

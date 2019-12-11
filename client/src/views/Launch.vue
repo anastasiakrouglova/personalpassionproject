@@ -1,9 +1,8 @@
 <template>
   <div class="launch-container">
     <p class="timer" @click="start()">{{countDown}}</p>
-    <img clas="img-connection" src="/assets/img/connection.svg" alt="connection" >
+    <img class="img-connection" src="/assets/img/connection.svg" alt="connection">
     <p class="text">Leg je gsm aan de kant en ga voor de spiegel staan.</p>
-    <div class="css-selector-demo" @Click="animeTest()">lalala</div>
   </div>
 </template>
 
@@ -75,4 +74,9 @@ methods: {
   .text {
       margin-bottom: 4rem;
   }
+
+  .img-connection {
+      opacity: 0.9;
+  }
+
 </style>

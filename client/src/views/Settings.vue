@@ -6,8 +6,11 @@
             <canvas id="waves"></canvas>
         </div> -->
         <!-- ref="bpm"  -->
+        <p ref="bpm"></p>
         <div id="container">
-          <div @click="statusText()">
+          <div @click="statusText()" @click.native="statusText()">
+          <img src="/assets/img/mirrorConnected.png" alt="mirror">
+          <img src="/assets/img/bluetoothConnected.png" alt="mirror">
         <app-switch classes="is-warning" v-model="value" unchecked>Bluetooth heart rate sensor</app-switch>
           </div>
         </div>
@@ -61,11 +64,13 @@ export default {
       //console.log('in functie handle');
       heartRateMeasurement.addEventListener('characteristicvaluechanged', event => {
         let heartRateMeasurement = heartRateSensor.parseHeartRate(event.target.value);
-        //this.$refs.bpm.innerHTML = heartRateMeasurement.heartRate + ' &#x2764;';
+        this.$refs.bpm.innerHTML = heartRateMeasurement.heartRate + ' &#x2764;';
         this.heartRates.push(heartRateMeasurement.heartRate);
         this.$store.dispatch('sendBluetoothSocket');
+        //console.log(this.heartRates);
       });
       //this.$store.dispatch('sendBluetoothSocket');
+      
     }
   }
 }
