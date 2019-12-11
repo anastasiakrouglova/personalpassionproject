@@ -21,6 +21,7 @@ export default new Vuex.Store({
     videoSrc: '',
     videoStarted: false,
     playing: true,
+    stop: false,
     heartRates: [],
     heartRate: true,
     workout: 'video mag afgespeeld worden',
@@ -141,5 +142,12 @@ export default new Vuex.Store({
         heartRate: heartRateMeasurement.heartRate
       });
     },
+    stopTrainingSocket() {
+      console.log('in stoptraining')
+      this.state.stop = true;
+      this.state.socket.emit('SEND_STOP', {
+        stopVideo: this.state.stop
+      });
+    }
   }
 });

@@ -5,7 +5,7 @@
                 <router-link class="router-item" type="type" v-bind:to="'/detail/' + workout.id">
                 <div>
                     <p class='exercise'>{{workout.title}}</p>
-                    <p class='time'>{{workout.time}} - {{workout.level}}</p>
+                    <p class='time'>{{workout.duration}} - {{workout.level}}</p>
                     <img class="bg-image" :src="'/assets/img/cover/' + workout.img + '.png'" alt="jump2" width=60%>
                 </div>
                 </router-link>
@@ -16,7 +16,7 @@
                 <router-link class="router-item" type="type" v-bind:to="'/detail/' + workout.id">
                 <div>
                     <p class='exercise'>{{workout.title}}</p>
-                    <p class='time'>{{workout.time}} - {{workout.level}}</p>
+                    <p class='time'>{{workout.duration}} - {{workout.level}}</p>
                     <img class="bg-image" :src="'/assets/img/cover/' + workout.img + '.png'" alt="jump2" width=60%>
                 </div>
                 </router-link>
@@ -27,7 +27,7 @@
                 <router-link class="router-item" type="type" v-bind:to="'/detail/' + workout.id">
                 <div>
                     <p class='exercise'>{{workout.title}}</p>
-                    <p class='time'>{{workout.time}} - {{workout.level}}</p>
+                    <p class='time'>{{workout.duration}} - {{workout.level}}</p>
                     <img class="bg-image" :src="'/assets/img/cover/' + workout.img + '.png'" alt="jump2" width=60%>
                 </div>
                 </router-link>
@@ -43,7 +43,6 @@ export default {
   props: {
     type: String,
     title: String,
-  
   }, 
   computed: {
     all() {
@@ -63,7 +62,7 @@ export default {
         return this.$store.state.workouts.filter(stretch => {
             return stretch.type === 'stretch'
         })
-    }
+    },
   }
 };
 </script>

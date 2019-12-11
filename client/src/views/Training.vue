@@ -1,15 +1,38 @@
 <template>
   <div class="training-container">
     <router-link class="arrowback" to="/"><ArrowBackIcon class="arrowback-training" w="30" h="30" /></router-link>
-    <video muted class="video-workout" ref="videoTraining" @ended="onPlayerEnded()" autoplay :src="'/assets/video/' + this.$store.state.workouts[$route.params.id - 1].img + '.mp4'" width=300></video>
+
+    <h1>{{this.$store.state.workouts[$route.params.id - 1].title}} </h1>
+    <video muted class="video-workout" ref="videoTraining" @ended="onPlayerEnded()"  @canplay="onPlayerStarted()" autoplay :src="'/assets/video/' + this.$store.state.workouts[$route.params.id - 1].img + '.mp4'" width=300></video>
+    <div @click="false" @drag="false">
+      <circle-slider v-model="timeLeft"
+            :min="0"
+            :max="this.$store.state.workouts[$route.params.id - 1].time"
+            :knob-radius="0.000001"
+            circle-color="#cecece"
+            progress-color="#00f"
+
+            >
+      </circle-slider>
+    </div>
+    <div>{{ secondsToMinutes }}</div>
+    <!-- <circle-slider
+      v-model="sliderValue"
+      :side="150"
+      :min="0"
+      :max="10000"
+      :step-size="100"
+      :circle-width-rel="20"
+      :progress-width-rel="10"
+      :knob-radius="10"
+      circle-color="#cecece"
+      progress-color="#00f"
+      knob-color="#5555ff"
+      @touchmove="false"
+    ></circle-slider> -->
     <div>
       <span  @click="play()"><PlayIcon  class="play-control-item play" v-show="!isPlaying" w="30" h="30"/></span>
       <span @click="pauze()"><PauseIcon class="play-control-item pauze" v-show="isPlaying" w="30" h="30"/></span>
-      <!-- <div>
-        <md-progress-bar md-mode="determinate" :md-value="amount"></md-progress-bar>
-        <md-progress-bar class="md-accent" md-mode="determinate" :md-value="amount"></md-progress-bar>
-        <input type="range" v-model.number="amount"> {{ amount }}%
-      </div> -->
     </div>
   </div>
 </template>
@@ -19,28 +42,48 @@ import io from "socket.io-client";
 import PlayIcon from 'vue-ionicons/dist/md-play'
 import PauseIcon from 'vue-ionicons/dist/md-pause'
 import ArrowBackIcon from 'vue-ionicons/dist/md-arrow-back'
-// import { mdProgressBar } from 'vue-material/dist/components'
 
 export default {
   name:'App',
   components: {
     PlayIcon, PauseIcon, ArrowBackIcon
-    //  mdProgressBar
   },
   data () {
     return {
       isPlaying: true,
-      amount: 50
+      amount: 50,
+      timeLeft: 300,
+
     }
   },
   created() {
-    //this.socket = io("http://localhost:3000");
     this.socket = io("https://mirrorcontrol.herokuapp.com/");
+  },
+  computed: {
+    secondsToMinutes() {
+      let minutes = Math.floor(this.timeLeft / 60);
+      let seconds = this.timeLeft - minutes * 60;
+
+      if (seconds < 10) {
+        let timeInMinutes = minutes + ':0' + seconds
+        return timeInMinutes;
+      }
+
+      if (seconds > 10) {
+        let timeInMinutes = minutes + ':' + seconds
+        return timeInMinutes;
+      } 
+
+      return timeInMinutes;  
+    }
   },
   methods: {
     play () {
+      //this.$refs.videoTraining.currentTime = this.$store.state.workouts[this.$route.params.id - 1].time - this.timeLeft;
+      //console.log('dit is huidig moment' + this.$refs.videoTraining.currentTime)
       this.$store.dispatch('playVideoSocket');
       this.$refs.videoTraining.play();
+      //console.log(this.$refs.videoTraining.duration)
     if (this.isPlaying === false) {
         this.isPlaying = true;
     } else {
@@ -48,6 +91,7 @@ export default {
     }
   },
   pauze () {
+    //console.log(this.$refs.videoTraining.duration);
     this.$store.dispatch('pauzeVideoSocket');
     this.$refs.videoTraining.pause();
     if (this.isPlaying === false) {
@@ -60,6 +104,19 @@ export default {
     this.$store.state.workoutDone = 'true';
     this.$store.dispatch('postWorkoutifDone')
     this.$router.push('/chart');
+  },
+  onPlayerStarted() {
+  this.timeLeft = this.$refs.videoTraining.duration;
+  //console.log(this.timeLeft);
+    this.isRunning = true
+    if(this.timeLeft > 0) {
+        setInterval(() => {
+          if(this.isPlaying) {
+            this.timeLeft --
+            //this.$store.state.workouts[this.$route.params.id - 1].time --
+          } 
+        }, 1000)
+    }  
   }
 }
 }
@@ -112,7 +169,7 @@ export default {
 }
 
 .training-container {
-  background-color: black;
+  /* background-color: black; */
   height: 100%;
 }
 </style>

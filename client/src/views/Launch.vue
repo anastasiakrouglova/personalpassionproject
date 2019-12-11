@@ -3,10 +3,13 @@
     <p class="timer" @click="start()">{{countDown}}</p>
     <img clas="img-connection" src="/assets/img/connection.svg" alt="connection" >
     <p class="text">Leg je gsm aan de kant en ga voor de spiegel staan.</p>
+    <div class="css-selector-demo" @Click="animeTest()">lalala</div>
   </div>
 </template>
 
 <script>
+import anime from 'animejs/lib/anime.es.js';
+
 export default {
 data() {
     return {
@@ -25,6 +28,20 @@ updated() {
     if(this.countDown < 0) {
         this.countDown = 0;
         this.$router.push('/detail/' + this.$route.params.id + '/training');
+    }
+},
+methods: {
+    animeTest() {
+      anime({
+        targets: '.css-selector-demo',
+        translateX: 250
+        // targets: '.Dial-fill path',
+        // strokeDashoffset: [anime.setDashoffset, 0],
+        // easing: 'linear',
+        // duration: duration,
+        // direction: 'reverse',
+        // autoplay: false
+      })
     }
 }
 }

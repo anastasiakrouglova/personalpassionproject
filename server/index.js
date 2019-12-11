@@ -28,11 +28,6 @@ io.on('connection', function(socket) {
         io.sockets.emit('startplay', data);
     });
 
-    // // VIDEOID VERZENDEN
-    // socket.on('SEND_VIDEOSRC', function (data) {
-    //     io.sockets.emit('videosrc', data);
-    // });
-
     // BLUETOOTH DATA VERZENDEN
     socket.on('SEND_BLUETOOTH', function (data) {
         //console.log('lalala')
@@ -48,6 +43,13 @@ io.on('connection', function(socket) {
     socket.on('SEND_PAUZED', function (data) {
         io.sockets.emit('pauzevideo', data);
     });
+
+    // VIDEO IS GEPAUSEERD
+    socket.on('SEND_STOP', function (data) {
+        io.sockets.emit('stopvideo', data);
+    });
+
+    
 });
 
 // Middleware

@@ -1,30 +1,39 @@
 <template>
     <div>
         <p>Settings</p>
-        <div id="container">
+        <!-- <div id="container">
             <div @click="statusText()" ref="bpm">PRESS TO SET BLUETOOTH WITH &#x2764;</div>
             <canvas id="waves"></canvas>
+        </div> -->
+        <!-- ref="bpm"  -->
+        <div id="container">
+          <div @click="statusText()">
+        <app-switch classes="is-warning" v-model="value" unchecked>Bluetooth heart rate sensor</app-switch>
+          </div>
         </div>
-        <!-- <heartRateSensor/> -->
-        <!-- <script src="../bluetooth/heartRateSensor.js"></script> -->
-        <!-- <script src="../bluetooh/app.js"></script> -->
     </div>
 </template> 
 
 <script>
-//import heartRateSensor from "./bluetooth/app.js"
+import Switch from '../components/Switch'
+
 import io from "socket.io-client";
 export default {
   name: "jumps",
   components: {
-    //heartRateSensor
-    
+    'app-switch': Switch
   },
   data () {
     return {
-        //heartRates: [38, 29, 45],
-        heartRates: []
+        heartRates: [],
+        value: false,
+        text: ''
     }
+  },
+  watch: {
+            value(val) {
+                this.text = val ? 'Yes' : 'No'
+            }
   },
   created() {
     //this.socket = io("http://localhost:3000");
@@ -34,17 +43,25 @@ export default {
   methods: {
     statusText() {
       // this.$refs.bpm.textContent = 'Searching...';
+      //console.log(this.value);
       heartRateSensor.connect()
-      .then(() => heartRateSensor.startNotificationsHeartRateMeasurement().then(this.handleHeartRateMeasurement))
+      .then(() => heartRateSensor.startNotificationsHeartRateMeasurement()
+      .then(this.value = true)
+      .then(this.handleHeartRateMeasurement)
+      // .then(console.log(this.value))
+      )
       .catch(error => {
-        this.$refs.bpm.textContent = 'oeps';
+        //this.$refs.bpm.textContent = 'oeps';
+        //console.log('error');
+        this.value = false;
+        //console.log(this.value);
       });
     },
     handleHeartRateMeasurement(heartRateMeasurement) {
       //console.log('in functie handle');
       heartRateMeasurement.addEventListener('characteristicvaluechanged', event => {
         let heartRateMeasurement = heartRateSensor.parseHeartRate(event.target.value);
-        this.$refs.bpm.innerHTML = heartRateMeasurement.heartRate + ' &#x2764;';
+        //this.$refs.bpm.innerHTML = heartRateMeasurement.heartRate + ' &#x2764;';
         this.heartRates.push(heartRateMeasurement.heartRate);
         this.$store.dispatch('sendBluetoothSocket');
       });

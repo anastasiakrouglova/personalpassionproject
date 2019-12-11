@@ -9,7 +9,7 @@
       <div class="info-container">
         <div>
           <IosTimeIcon w="25" h="25"/>
-          <p> {{this.$store.state.workouts[$route.params.id - 1].time}} </p>
+          <p> {{this.$store.state.workouts[$route.params.id - 1].duration}} </p>
         </div>
         <div>
           <IosMusicalNoteIcon w="25" h="25" />

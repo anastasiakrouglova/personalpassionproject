@@ -28,6 +28,11 @@
         console.log('dit is je hartslag ' + data.heartRate);
         $bpm.innerHTML = data.heartRate
       })
+    
+      socket.on(`stopvideo`, (data) => {
+        console.log('video wordt gestopt');
+        $video.pause();
+      })
   };
   init();
 }

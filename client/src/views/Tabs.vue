@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="tabs">
+    <nav @click="stopTraining()" class="tabs">
       <router-link to="/"><MdFitnessIcon w="25" h="25" /></router-link>
       <router-link to="/chart"><MdStatsIcon w="25" h="25" /></router-link>
       <router-link to="/settings"><MdSettingsIcon w="25" h="25" /></router-link>
@@ -9,9 +9,11 @@
 </template>
 
 <script>
+import io from "socket.io-client";
 import MdStatsIcon from 'vue-ionicons/dist/md-stats.vue'
 import MdFitnessIcon from 'vue-ionicons/dist/md-fitness.vue'
 import MdSettingsIcon from 'vue-ionicons/dist/md-settings.vue'
+
 export default {
   name:'Tabs',
   components: {
@@ -19,6 +21,16 @@ export default {
     MdStatsIcon,
     MdSettingsIcon
   },
+  created() {
+    //this.socket = io("http://localhost:3000/");
+    this.socket = io("https://mirrorcontrol.herokuapp.com/");
+  },
+  methods: {
+    stopTraining() {
+      //console.log('gedrukt op tab')
+      this.$store.dispatch('stopTrainingSocket');
+    }
+  }
 }
 </script>
 
