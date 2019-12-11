@@ -31,7 +31,8 @@
     
       socket.on(`stopvideo`, (data) => {
         console.log('video wordt gestopt');
-        $video.pause();
+        //$video.pause();
+        window.location = "mirror.html";
       })
   };
   init();
