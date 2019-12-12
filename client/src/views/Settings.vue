@@ -1,15 +1,12 @@
 <template>
     <div>
         <h1 class="title">Settings</h1>
-        <!-- <div id="container">
-            <div @click="statusText()" ref="bpm">PRESS TO SET BLUETOOTH WITH &#x2764;</div>
-            <canvas id="waves"></canvas>
-        </div> -->
-        <!-- ref="bpm"  -->
         <p ref="bpm"></p>
         <div id="container">
           <div class="click-container" @click="statusText()" @click.native="statusText()">
-            <app-switch class="checkbox-settings" v-model="value" unchecked>
+            <!-- <app-switch class="checkbox-settings" v-model="value" unchecked> -->
+            <app-switch class="checkbox-settings" v-model="checked">
+              <!-- <input type="checkbox" v-model="checked"> -->
               <div class="info-settings">
               <img class="image-settings" src="/assets/img/bluetooth.svg" alt="bluetooth" width=15>
                 <div>
@@ -20,16 +17,16 @@
             </app-switch>
           </div>
           <div class="click-container">
-            <app-switch  class="checkbox-settings"  v-model="value" unchecked>
-
-              <div class="info-settings">
-              <img class="image-settings" src="/assets/img/mirror.svg" alt="mirror" width=30>
-                <div>
+            <div class="mirror-settings">
+              <div class="mirror-container">
+              <img  src="/assets/img/mirror.svg" alt="mirror" width=30>
+                <div class="mirror-div-setting">
                   <span class="type-settings">Smart Mirror</span> <br>
                   <span class="subtitle-settings">Fit to skate</span>
                 </div>
+                <img class="image-settings" src="/assets/img/mirrorConnected.svg" alt="mirrorConnected" width=30>
             </div>
-            </app-switch>
+            </div>
           </div>
         </div>
     </div>
@@ -48,7 +45,8 @@ export default {
     return {
         // heartRates: [],
         value: false,
-        text: ''
+        text: '',
+        checked: false
     }
   },
   watch: {
@@ -65,16 +63,19 @@ export default {
     statusText() {
       // this.$refs.bpm.textContent = 'Searching...';
       //console.log(this.value);
+      this.checked = false;
+      //console.log(this.checked);
       heartRateSensor.connect()
       .then(() => heartRateSensor.startNotificationsHeartRateMeasurement()
-      .then(this.value = true)
+      .then(this.checked = true)
       .then(this.handleHeartRateMeasurement)
       // .then(console.log(this.value))
       )
       .catch(error => {
         //this.$refs.bpm.textContent = 'oeps';
         //console.log('error');
-        this.value = false;
+        this.checked = false;
+        //console.log(this.checked);
         //console.log(this.value);
       });
     },
@@ -138,6 +139,21 @@ export default {
   text-align: left;
   padding-left: 2rem;
   padding-top: 0.2rem;
+}
+
+.mirror-container {
+  display: flex;
+  justify-content:left;
+}
+
+.mirror-div-setting {
+  padding-left: 1rem;
+  padding-right: 5rem;
+  text-align: left;
+}
+
+.mirror-settings {
+  margin-left: 1rem;
 }
 
 </style>

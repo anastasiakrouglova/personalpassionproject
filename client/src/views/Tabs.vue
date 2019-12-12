@@ -42,6 +42,7 @@ export default {
     background: white;
     border-radius: 1.5rem;
     box-shadow: 0rem -0.3rem 0.2rem rgba(173, 173, 173, 0.1);
+    z-index: 3;
 }
 
 .tabs a {

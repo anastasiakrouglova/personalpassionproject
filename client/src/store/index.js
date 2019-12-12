@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 //import VuePageTransition from 'vue-page-transition'
-import VueSocketIO from 'vue-socket.io';
+// import VueSocketIO from 'vue-socket.io';
 import io from 'socket.io-client';
 import axios from "axios";
 import "../bluetooth/heartRateSensor.js"
@@ -9,15 +9,18 @@ import "../bluetooth/heartRateSensor.js"
 Vue.use(Vuex, axios);
 //Vue.use(VuePageTransition);
 
-Vue.use(new VueSocketIO({
-  // debug: true,
-  connection: 'https://mirrorcontrol.herokuapp.com/api/workouts',
-  //options: { path: "/my-app/" } //Optional options
-}))
+// Vue.use(new VueSocketIO({
+//   // debug: true,
+//   connection: 'https://mirrorcontrol.herokuapp.com/api/workouts',
+//   //options: { path: "/my-app/" } //Optional options
+// }))
 
-export default new Vuex.Store({
+let socket = io.connect('https://mirrorcontrol.herokuapp.com/');
+
+const store = new Vuex.Store({
   state: {
-    socket: io('https://mirrorcontrol.herokuapp.com/'),
+    socket,
+    socketConnected: false,
     videoSrc: '',
     videoStarted: false,
     playing: true,
@@ -176,3 +179,22 @@ export default new Vuex.Store({
     }
   }
 });
+
+socket.on('connect', () => {
+  // console.log('connected');
+  store.state.socketConnected = true;
+});
+socket.on('disconnect', () => {
+  // console.log('disconnect');
+  store.state.socketConnected = false;
+});
+socket.on('connect_error', () => {
+  // console.log('connect_error');
+  store.state.socketConnected = false;
+});
+socket.on('connect_timeout', () => {
+  // console.log('connect_timeout');
+  store.state.socketConnected = false;
+});
+
+export default store;

@@ -1,6 +1,7 @@
 <template>
     <label class="switch">
-        <input :class="classes" type="checkbox" :checked="checked" :name="name" :disabled="disabled" v-model="value">
+        <!-- <input :class="classes" type="checkbox" :checked="checked" :name="name" :disabled="disabled" v-model="checked"> -->
+        <input type="checkbox" :checked="checked" v-on:change="$emit('change', $event.target.checked)">
         <span><slot></slot></span>
     </label>
 </template>
@@ -8,33 +9,14 @@
 <script>
     export default {
         props: {
-            disabled: Boolean,
-            classes: String,
-            checked: Boolean,
-            name: String
+            checked: Boolean
         },
-        data() {
-            return {
-                value: null
-            }
-        },
-        beforeMount() {
-            this.value = this.checked
-        },
-        mounted() {
-            // console.log(this.value)
-            // console.log(this.value)
-            this.$emit('input', this.value)
-        },
-        watch: {
-            value(val) {
-                this.$emit('input', val)
-            },
-            checked (val) {
-                this.value = val
-            }
+        model: {
+            prop: 'checked',
+            event: 'change'
         }
     }
+    
 </script>
 
 <style lang="scss">
@@ -92,4 +74,5 @@
             }
         }
     }
+
 </style>

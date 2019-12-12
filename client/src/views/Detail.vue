@@ -48,7 +48,7 @@ export default {
     }
   },
   created() {
-    this.socket = io("http://localhost:3000");
+    // this.socket = io("http://localhost:3000");
     //this.socket = io("https://mirrorcontrol.herokuapp.com/");
   },
   methods: {
@@ -89,7 +89,6 @@ export default {
     display: flex;
     justify-content: center;
     margin-left: -3.5rem;
-
   }
 
   .detail {
@@ -99,20 +98,19 @@ export default {
   }
 
   .img-detail {
-    background-color: black;
+    background-color: linear-gradient(145deg, #3C3C3C, #050505);
     width: 100%;
     z-index: -1;
     position: absolute;
     left: 0;
-    margin-top: -4rem;
-
+    opacity: 0.7;
+    margin-top: 2rem;
   }
 
   .detail-container {
-    z-index: 2;
+
     background-color: white;
-    box-shadow: 0rem -0.6rem 0.5rem rgba(0, 0, 0, 0.2);
-    border-radius: 2rem;
+    border-radius: 2rem 2rem 0rem 0rem;
     padding-top: 1rem;
     position: relative;
     margin-top: 16rem;
@@ -134,6 +132,7 @@ export default {
 
 .info-text {
   padding: 0rem 1rem 7rem 1rem;
+  margin-bottom: -7rem;
 }
 
 

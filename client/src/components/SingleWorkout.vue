@@ -6,7 +6,11 @@
                 <div>
                     <div class="darkOverflow"></div>
                     <p class='exercise'>{{workout.title}}</p>
-                    <p class='time'>{{workout.duration}} - {{workout.level}}</p>
+                    <img class='time' v-if="workout.level === 'beginner'" src="/assets/img/levelWhite/level1.svg" alt="level1">
+                    <img class='time' v-if="workout.level === 'easy'" src="/assets/img/levelWhite/level2.svg" alt="level2">
+                    <img class='time' v-if="workout.level === 'intermediate'" src="/assets/img/levelWhite/level3.svg" alt="level3">
+                    <img class='time' v-if="workout.level === 'experienced'" src="/assets/img/levelWhite/level4.svg" alt="level4">
+                    <!-- <p class='time'>{{workout.level}}</p> -->
                     <img class="bg-image" :src="'/assets/img/cover/' + workout.img + '.png'" alt="jump2" width=60%>
                 </div>
                 </router-link>
@@ -18,7 +22,10 @@
                 <div>
                     <div class="darkOverflow"></div>
                     <p class='exercise'>{{workout.title}}</p>
-                    <p class='time'>{{workout.duration}} - {{workout.level}}</p>
+                    <img class='time' v-if="workout.level === 'beginner'" src="/assets/img/levelWhite/level1.svg" alt="level1">
+                    <img class='time' v-if="workout.level === 'easy'" src="/assets/img/levelWhite/level2.svg" alt="level2">
+                    <img class='time' v-if="workout.level === 'intermediate'" src="/assets/img/levelWhite/level3.svg" alt="level3">
+                    <img class='time' v-if="workout.level === 'experienced'" src="/assets/img/levelWhite/level4.svg" alt="level4">
                     <img class="bg-image" :src="'/assets/img/cover/' + workout.img + '.png'" alt="jump2" width=60%>
                 </div>
                 </router-link>
@@ -30,7 +37,10 @@
                 <div>
                     <div class="darkOverflow"></div>
                     <p class='exercise'>{{workout.title}}</p>
-                    <p class='time'>{{workout.duration}} - {{workout.level}}</p>
+                    <img class='time' v-if="workout.level === 'beginner'" src="/assets/img/levelWhite/level1.svg" alt="level1">
+                    <img class='time' v-if="workout.level === 'easy'" src="/assets/img/levelWhite/level2.svg" alt="level2">
+                    <img class='time' v-if="workout.level === 'intermediate'" src="/assets/img/levelWhite/level3.svg" alt="level3">
+                    <img class='time' v-if="workout.level === 'experienced'" src="/assets/img/levelWhite/level4.svg" alt="level4">
                     <img class="bg-image" :src="'/assets/img/cover/' + workout.img + '.png'" alt="jump2" width=60%>
                 </div>
                 </router-link>
@@ -106,18 +116,16 @@ export default {
     z-index: 5;
     padding-top: 4rem;
     line-height: 2rem;
+    margin-bottom: 0.9rem;
 }
 
 .time {
     color: white;
-    font-size: 0.7rem;
-    text-align: left;
-    padding-left: 1rem;
-    opacity: 0.7;
-    padding-top: 0.4rem;
     position: relative;
     text-align: center;
     z-index: 5;
+    width: 5rem;
+
 }
 
 

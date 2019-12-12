@@ -2,35 +2,21 @@
   <div class="training-container">
     <router-link class="arrowback" to="/"><ArrowBackIcon class="arrowback-training" w="30" h="30" /></router-link>
 
-    <h1>{{this.$store.state.workouts[$route.params.id - 1].title}} </h1>
-    <!-- <span class="hidden"> -->
+    <h2 class="name-training">{{this.$store.state.workouts[$route.params.id - 1].title}} </h2>
     <video muted class="video-workout" ref="videoTraining" @ended="onPlayerEnded()"  @canplay="onPlayerStarted()" autoplay :src="'/assets/video/' + this.$store.state.workouts[$route.params.id - 1].img + '.mp4'" width=100></video>
-    <!-- </span> -->
     <div @click="false" @drag="false">
-      <circle-slider v-model="timeLeft"
+      <circle-slider class="circle-slider-class" style="pointer-events: none" v-model="timeLeft"
             :min="0"
             :max="this.$store.state.workouts[$route.params.id - 1].time"
             :knob-radius="0.000001"
             circle-color="#cecece"
-            progress-color="#00f"
+            progress-color="#3E74B8"
+            :side="150"
             >
       </circle-slider>
     </div>
-    <div>{{ secondsToMinutes }}</div>
-    <!-- <circle-slider
-      v-model="sliderValue"
-      :side="150"
-      :min="0"
-      :max="10000"
-      :step-size="100"
-      :circle-width-rel="20"
-      :progress-width-rel="10"
-      :knob-radius="10"
-      circle-color="#cecece"
-      progress-color="#00f"
-      knob-color="#5555ff"
-      @touchmove="false"
-    ></circle-slider> -->
+    <div class="minutes-left">minutes left</div>
+    <div class="time-left">{{ secondsToMinutes }}</div>
     <div>
       <span  @click="play()"><PlayIcon  class="play-control-item play" v-show="!isPlaying" w="30" h="30"/></span>
       <span @click="pauze()"><PauseIcon class="play-control-item pauze" v-show="isPlaying" w="30" h="30"/></span>
@@ -138,10 +124,13 @@ export default {
 
 .video-workout {
   margin-top: -2rem;
+  opacity: 0;
+  position: absolute;
 }
 
 .pauze {
-  background-image: url(https://himalayasingh.github.io/audio-player-play-and-pause-animation-1/img/bg.gif);
+  /* background-image: url(https://himalayasingh.github.io/audio-player-play-and-pause-animation-1/img/bg.gif); */
+  background-color: #3E74B8;
   background-size: 13rem;
   background-repeat: no-repeat;
   background-position-x: 50%;
@@ -149,12 +138,14 @@ export default {
   margin: -1rem;
   padding: 2.6rem 1rem 0rem 1rem;
   color: white;
-  height: 8rem;
+  height: 4rem;
+  width: 4rem;
   overflow-x: hidden;
 }
 
 .play {
-  background-image: url(https://himalayasingh.github.io/audio-player-play-and-pause-animation-1/img/f1.gif);
+  /* background-image: url(https://himalayasingh.github.io/audio-player-play-and-pause-animation-1/img/f1.gif); */
+  background-color: #3E74B8;
   background-size: 13rem;
   background-repeat: no-repeat;
   background-position-x: 50%;
@@ -162,7 +153,8 @@ export default {
   margin: 0rem;
   padding: 1.6rem 1rem 0rem 1rem;
   color: white;
-  height: 8rem;
+  height: 4rem;
+  width: 4rem;
   overflow-x: hidden;
 }
 
@@ -175,7 +167,28 @@ export default {
   height: 100%;
 }
 
-.hidden {
-  display: none;
+.circle-slider-class {
+  transform: rotateZ(180deg);
+  transform: rotateX(180deg);
+}
+
+.time-left {
+  margin-top: -0.2rem;
+  padding-bottom: 4rem;
+  font-size: 2.5rem;
+  font-weight: bolder
+}
+
+.minutes-left {
+  color: #3E74B8;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  margin-top: -6.4rem;
+  text-align: center;
+}
+.name-training {
+  margin-top: 6rem;
+  margin-bottom: 3rem;
+  font-weight: bold;
 }
 </style>
