@@ -3,9 +3,9 @@
     <router-link class="arrowback" to="/"><ArrowBackIcon class="arrowback-training" w="30" h="30" /></router-link>
 
     <h1>{{this.$store.state.workouts[$route.params.id - 1].title}} </h1>
-    <span class="hidden">
+    <!-- <span class="hidden"> -->
     <video muted class="video-workout" ref="videoTraining" @ended="onPlayerEnded()"  @canplay="onPlayerStarted()" autoplay :src="'/assets/video/' + this.$store.state.workouts[$route.params.id - 1].img + '.mp4'" width=100></video>
-    </span>
+    <!-- </span> -->
     <div @click="false" @drag="false">
       <circle-slider v-model="timeLeft"
             :min="0"
@@ -13,7 +13,6 @@
             :knob-radius="0.000001"
             circle-color="#cecece"
             progress-color="#00f"
-
             >
       </circle-slider>
     </div>
@@ -105,6 +104,7 @@ export default {
   onPlayerEnded() {
     this.$store.state.workoutDone = 'true';
     this.$store.dispatch('postWorkoutifDone')
+    this.$store.dispatch('postHeartRates')
     this.$router.push('/chart');
   },
   onPlayerStarted() {

@@ -1,5 +1,6 @@
 <template>
   <div class="pirouette">
+    <h1 class="title">Workouts</h1>
     <Navigation/>
     <SingleWorkout msg="Pirouette" />
   </div>

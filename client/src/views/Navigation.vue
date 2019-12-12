@@ -12,7 +12,7 @@
 <style>
 
 .navigation {
-  padding: 3rem 0;
+  padding: 2rem 0 3rem;
 }
 
 .navigation a {

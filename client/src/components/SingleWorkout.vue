@@ -1,37 +1,40 @@
 <template >
     <div>
         <div class="maxi-container" v-if="this.$route.path === '/'">
-            <li class="container" v-for='workout in onlyJumps' :key="workout.id">
+            <div class="container" v-for='workout in onlyJumps' :key="workout.id">
                 <router-link class="router-item" type="type" v-bind:to="'/detail/' + workout.id">
                 <div>
+                    <div class="darkOverflow"></div>
                     <p class='exercise'>{{workout.title}}</p>
                     <p class='time'>{{workout.duration}} - {{workout.level}}</p>
                     <img class="bg-image" :src="'/assets/img/cover/' + workout.img + '.png'" alt="jump2" width=60%>
                 </div>
                 </router-link>
-            </li>
+            </div>
         </div>
         <div class="maxi-container" v-if="this.$route.path === '/pirouette'">
-            <li class="container" v-for='workout in onlyPirouettes' :key="workout.id">
+            <div class="container" v-for='workout in onlyPirouettes' :key="workout.id">
                 <router-link class="router-item" type="type" v-bind:to="'/detail/' + workout.id">
                 <div>
+                    <div class="darkOverflow"></div>
                     <p class='exercise'>{{workout.title}}</p>
                     <p class='time'>{{workout.duration}} - {{workout.level}}</p>
                     <img class="bg-image" :src="'/assets/img/cover/' + workout.img + '.png'" alt="jump2" width=60%>
                 </div>
                 </router-link>
-            </li>
+            </div>
         </div>
         <div class="maxi-container" v-if="this.$route.path === '/stretch'">
-            <li class="container" v-for='workout in onlyStretch' :key="workout.id">
+            <div class="container" v-for='workout in onlyStretch' :key="workout.id">
                 <router-link class="router-item" type="type" v-bind:to="'/detail/' + workout.id">
                 <div>
+                    <div class="darkOverflow"></div>
                     <p class='exercise'>{{workout.title}}</p>
                     <p class='time'>{{workout.duration}} - {{workout.level}}</p>
                     <img class="bg-image" :src="'/assets/img/cover/' + workout.img + '.png'" alt="jump2" width=60%>
                 </div>
                 </router-link>
-            </li>
+            </div>
         </div>
     </div>
     
@@ -67,28 +70,26 @@ export default {
 };
 </script>
 
-
 <style>
 .maxi-container {
     display: flex;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding-left: 1rem;
 }
 
 .container{
-    list-style-type: none;
-    background-color: black;
+    background-image: linear-gradient(145deg, #3C3C3C, #050505);
     box-shadow: 0 4px 8px 0 rgba(93,182,213,0.2);
-    width: 10rem;
+    width: 95%;
     height: 15rem;
     border-radius: 5px;
     margin: 0.5rem;
-    min-width: 10rem;
     letter-spacing: 0.02rem;
-    overflow: hidden;
     line-height: 1.2rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .router-item {
@@ -97,33 +98,47 @@ export default {
 
 .exercise {
     color: white;
-    font-size: 1rem;
-    margin-bottom: -1rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    display: relative;
-    text-align: left;
-    padding-left: 1rem;
+    position: relative;
+    text-align: center;
     text-transform: uppercase;
+    z-index: 5;
+    padding-top: 4rem;
+    line-height: 2rem;
 }
 
 .time {
     color: white;
     font-size: 0.7rem;
-    display: absolute;
     text-align: left;
     padding-left: 1rem;
     opacity: 0.7;
     padding-top: 0.4rem;
+    position: relative;
+    text-align: center;
+    z-index: 5;
 }
 
 
 .bg-image {
-    left: -2;
-    width: 190px;
-    margin-top: -1rem;
-    margin-left: -4rem;
-    z-index: -1;
-    display: relative;
+    position: absolute;
+    top: 55%;  /* position the top  edge of the element at the middle of the parent */
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 27rem;
+}
+
+
+.darkOverflow {
+    color: black;
+    background-color: black;
+    width: 100%;
+    z-index: 1;
+    height: 20rem;
+    position: absolute;
+    opacity: 0.38;
+    margin-top: -4rem;
 }
 
 

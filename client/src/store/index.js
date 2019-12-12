@@ -22,12 +22,12 @@ export default new Vuex.Store({
     videoStarted: false,
     playing: true,
     stop: false,
+    heartRatesData: [],
     heartRates: [],
     heartRate: true,
     workout: 'video mag afgespeeld worden',
     workouts: [],
     stats: [],
-    heartRates: [],
     workoutDone: 'false',
     week: '2',
     dayObjects: [
@@ -108,26 +108,36 @@ export default new Vuex.Store({
       axios
         .get('https://mirrorcontrol.herokuapp.com/api/heartRates')
         .then(data => {
-          let heartRates = data.data
-          commit('SET_HEARTRATE', heartRates)
-          //console.log(heartRates)
+          let heartRatesData = data.data
+          commit('SET_HEARTRATE', heartRatesData)
+          //console.log(heartRatesData)
         })
         .catch(error => {
+          //console.log('somethingw went wrong' + error)
         })
     },
     postWorkoutifDone({ commit }) {
       axios
         .post('https://mirrorcontrol.herokuapp.com/api/stats', {
           day: new Date().getDay(),
-          // type: req.body.type,
-          // duration: req.body.duration,
           workoutDone: this.state.workoutDone,
           week: this.state.week
-          //date: req.body.date
       })
         .then(response => {
           ('getted response')
           let stats = response.data;
+      })
+        .catch(error => {
+      });
+    },
+    postHeartRates({ commit }) {
+      axios
+        .post('https://mirrorcontrol.herokuapp.com/api/heartRates', {
+          heartRates: this.state.heartRates,
+      })
+        .then(response => {
+          ('getted response')
+          let heartRates = response.data;
       })
         .catch(error => {
       });

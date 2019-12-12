@@ -1,5 +1,6 @@
 <template>
   <div class="stretch">
+    <h1 class="title">Workouts</h1>
     <Navigation />
     <SingleWorkout msg="Stretch" />
   </div>

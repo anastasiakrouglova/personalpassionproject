@@ -17,6 +17,7 @@ export default {
   mounted() {
     this.$store.dispatch('loadWorkouts');
     this.$store.dispatch('loadStats')
+    this.$store.dispatch('loadHeartRate')
   },
   computed: {
     ...mapState([

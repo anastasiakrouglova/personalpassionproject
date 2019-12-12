@@ -1,45 +1,49 @@
 <template>
   <div class="charts">
-    <p>Well done! Here are some stats of your workout today</p> 
-
+    <h1 class="title">Statistics</h1>
     <li class="days-container" v-for='dayObject in doneDays' :key="dayObject.label">  
     </li>
-
-    <p>{{latestHeartRates}}</p>
-
     <h2 class="week-title">this week</h2>
     <div class="week-container">
         <div v-for="dayObject in this.$store.state.dayObjects" :key="dayObject.label">
           <WeekDay :dayObject="dayObject" />
       </div >
     </div>
-    <h2 class="week-title">BPM in your last workout</h2>
-    <trend
-    :data="[0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0]"
+    <h2 class="week-title">BPM of your last workout</h2>
+    <!-- <trend
+    :data="latestHeartRates[0].heartRates"
     :gradient="['#6fa8dc', '#42b983', '#2c3e50']"
     auto-draw
     smooth>
-  </trend>
+  </trend> -->
+  <pure-vue-chart
+  :points="latestHeartRates"
+  :width="300"
+  :height="150"
+  :show-y-axis="true"
+  />
   <!-- <img src="/assets/img/done.gif" alt="test"> -->
   </div>
 </template>
 
 <script>
-import Trend from "vuetrend"
+// import Trend from "vuetrend"
 import WeekDay from '../components/WeekDay.vue'
+import PureVueChart from 'pure-vue-chart';
 
 export default {
   name: "jumps",
   components: {
-    Trend,
-    WeekDay
+    // Trend,
+    WeekDay,
+    PureVueChart
   },
   data () {
     return {
       loading: 'getLoadingState',
+      heartRates: []
     }
   },
-
   computed: {
     doneDays() {
       this.filterDays()
@@ -47,7 +51,17 @@ export default {
       return this.$store.state.stats;
     },
     latestHeartRates() {
-      return this.$store.state.heartRates;
+      let heartRate = this.$store.state.heartRates[this.$store.state.heartRates.length-1].heartRates;
+      
+      for(let i=0; i < heartRate.length; i++){
+        let currentHeartRate = heartRate[i];
+
+        if (typeof(currentHeartRate) == 'object') {
+          heartRate[i] = null
+        }
+      }
+      
+      return heartRate.filter(Number)
     },
     today() {
       let dayNr = new Date().getDay() - 1;
