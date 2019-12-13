@@ -17,6 +17,7 @@
     </div>
     <div class="minutes-left">minutes left</div>
     <div class="time-left">{{ secondsToMinutes }}</div>
+    <p>{{this.$store.state.heartRates[this.$store.state.heartRates.length -1].heartRates}} BPM</p>
     <div>
       <span  @click="play()"><PlayIcon  class="play-control-item play" v-show="!isPlaying" w="30" h="30"/></span>
       <span @click="pauze()"><PauseIcon class="play-control-item pauze" v-show="isPlaying" w="30" h="30"/></span>
@@ -86,14 +87,22 @@ export default {
     } else {
       this.isPlaying = false;
     }
+    this.$store.state.workoutDone = 'true';
+    this.$store.dispatch('postWorkoutifDone')
+    this.$store.dispatch('postHeartRates')
+    this.$router.push('/transition');
+    
   },
   onPlayerEnded() {
     this.$store.state.workoutDone = 'true';
     this.$store.dispatch('postWorkoutifDone')
     this.$store.dispatch('postHeartRates')
-    this.$router.push('/chart');
+    //this.$router.push('/chart');
+    //this.$router.push('detail/' + this.$route.params.id + '/transition');
   },
   onPlayerStarted() {
+        this.$store.state.workoutDone = 'false';
+
   this.timeLeft = this.$refs.videoTraining.duration;
   //console.log(this.timeLeft);
     this.isRunning = true

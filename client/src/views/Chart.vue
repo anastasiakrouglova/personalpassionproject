@@ -1,6 +1,7 @@
 <template>
   <div class="charts">
     <h1 class="title">Statistics</h1>
+    <!-- <p>{{latestHeartRates}}</p> -->
     <li class="days-container" v-for='dayObject in doneDays' :key="dayObject.label">  
     </li>
     <h2 class="week-title">this week</h2>
@@ -9,27 +10,26 @@
           <WeekDay :dayObject="dayObject" />
       </div >
     </div>
+
     <h2 class="week-title">BPM of your last workout</h2>
-    <!-- <trend
-    :data="latestHeartRates[0].heartRates"
-    :gradient="['#6fa8dc', '#42b983', '#2c3e50']"
-    auto-draw
-    smooth>
-  </trend> -->
-  <pure-vue-chart
-  :points="latestHeartRates"
-  :width="300"
-  :height="150"
-  :show-y-axis="true"
-  />
-  <!-- <img src="/assets/img/done.gif" alt="test"> -->
+    <div class="chart-heart">
+      <pure-vue-chart 
+      :points="latestHeartRates"
+      :width="adjustedWidth"
+      :height="150"
+      :show-y-axis="true"
+      />
+    </div>
   </div>
+  
 </template>
 
 <script>
 // import Trend from "vuetrend"
 import WeekDay from '../components/WeekDay.vue'
 import PureVueChart from 'pure-vue-chart';
+
+let firstLoad = true
 
 export default {
   name: "jumps",
@@ -41,8 +41,11 @@ export default {
   data () {
     return {
       loading: 'getLoadingState',
-      heartRates: []
+      //heartRates: []
     }
+  },
+  updated() {
+    firstLoad = true;
   },
   computed: {
     doneDays() {
@@ -51,17 +54,46 @@ export default {
       return this.$store.state.stats;
     },
     latestHeartRates() {
-      let heartRate = this.$store.state.heartRates[this.$store.state.heartRates.length-1].heartRates;
-      
-      for(let i=0; i < heartRate.length; i++){
-        let currentHeartRate = heartRate[i];
+      if (this.$store.state.heartRates[this.$store.state.heartRates.length - 1] === null) {
+        return []
+      }
+
+      if (this.$store.state.heartRates[this.$store.state.heartRates.length - 1] === undefined) {
+        return []
+      }
+
+      let heartRatesMain = this.$store.state.heartRates[this.$store.state.heartRates.length - 1]
+
+      for (let i=0; i < heartRatesMain.heartRates.length; i++){
+        let currentHeartRate = heartRatesMain.heartRates[i]
 
         if (typeof(currentHeartRate) == 'object') {
-          heartRate[i] = null
+          heartRatesMain.heartRates[i] = null
         }
       }
-      
-      return heartRate.filter(Number)
+
+      return heartRatesMain.heartRates.filter(Number)
+
+      /*
+      for(let i=0; i < this.$store.state.heartRates[this.$store.state.heartRates.length-1].heartRates.length; i++){
+        let currentHeartRate = this.$store.state.heartRates[this.$store.state.heartRates.length-1].heartRates[i];
+
+        if (typeof(currentHeartRate) == 'object') {
+          this.$store.state.heartRates[this.$store.state.heartRates.length-1].heartRates[i] = null
+        }
+      }
+
+      return this.$store.state.heartRates[this.$store.state.heartRates.length-1].heartRates.filter(Number)*/
+    },
+    adjustedWidth() {
+      if (this.$store.state.heartRates[this.$store.state.heartRates.length - 1] == null) {
+        return 0
+      }
+
+      let heartRate = this.$store.state.heartRates[this.$store.state.heartRates.length-1].heartRates;
+      let width = heartRate.length * 4;
+
+      return width;
     },
     today() {
       let dayNr = new Date().getDay() - 1;
@@ -82,6 +114,7 @@ export default {
     iDay() {
     for (let n = 0; n<7; n++){
       this.$store.state.dayObjects[n].active = false;
+      console.log(this.$store.stats)
       for (let i = 0; i < this.$store.state.stats.length; i++) {
  
       if (this.$store.state.stats[i].week === '2'){
@@ -136,5 +169,10 @@ export default {
   padding-bottom: 0.1rem;
 }
 
+
+.chart-heart {
+  overflow: scroll;
+  padding: 1rem;
+}
 
 </style>

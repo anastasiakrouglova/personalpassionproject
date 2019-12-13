@@ -86,6 +86,16 @@ const store = new Vuex.Store({
     playVideo(videoID) {
       store.data.workouts.push(videoID);
     },
+    handleHeartRateMeasurement(heartRateMeasurement) {
+      //console.log('in functie handle');
+      heartRateMeasurement.addEventListener('characteristicvaluechanged', event => {
+        let heartRateMeasurement = heartRateSensor.parseHeartRate(event.target.value);
+        //this.$refs.bpm.innerHTML = heartRateMeasurement.heartRate + ' &#x2764;';
+        this.state.heartRates.push(heartRateMeasurement.heartRate);
+        //this.dispatch('sendBluetoothSocket');
+        console.log(this.state.heartRates);
+      });
+    },
     loadWorkouts({ commit }) {
       axios
         .get('https://mirrorcontrol.herokuapp.com/api/workouts')
@@ -165,7 +175,9 @@ const store = new Vuex.Store({
       });
     },
     sendBluetoothSocket() {
+      console.log(this.state.heartRates);
       let heartRateMeasurement = heartRateSensor.parseHeartRate(event.target.value);
+      this.state.heartRates.push(heartRateMeasurement.heartRate);
       this.state.socket.emit('SEND_BLUETOOTH', {
         heartRate: heartRateMeasurement.heartRate
       });

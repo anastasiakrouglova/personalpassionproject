@@ -25,6 +25,26 @@
           ]);
         })
       }
+      onDisconnectButtonClick() {
+        log('Disconnecting from Bluetooth Device...');
+        if (this.device.gatt.connected) {
+          this.device.gatt.disconnect();
+        } else {
+          log('> Bluetooth Device is already disconnected');
+        }
+      }
+      
+      onDisconnected(event) {
+        // Object event.target is Bluetooth Device getting disconnected.
+        log('> Bluetooth Device disconnected');
+      }
+      disconnect() {
+        return navigator.bluetooth.requestDevice({filters:[{services:[ 'heart_rate' ]}]})
+        .then(device => {
+          this.device = device;
+          return device.gatt.disconnect();
+        })
+      }
   
       /* Heart Rate Service */
   

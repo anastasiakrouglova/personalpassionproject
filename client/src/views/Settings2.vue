@@ -1,10 +1,12 @@
 <template>
     <div>
         <h1 class="title">Settings</h1>
-        
+        <p ref="bpm"></p>
         <div id="container">
           <div class="click-container" @click="statusText()" @click.native="statusText()">
-            <app-switch class="checkbox-settings" v-model="value" unchecked>
+            <!-- <app-switch class="checkbox-settings" v-model="value" unchecked> -->
+            <app-switch class="checkbox-settings" v-model="checked">
+              <!-- <input type="checkbox" v-model="checked"> -->
               <div class="info-settings">
               <img class="image-settings" src="/assets/img/bluetooth.svg" alt="bluetooth" width=15>
                 <div>
@@ -13,7 +15,6 @@
                 </div>
               </div>
             </app-switch>
-            <p ref="bpm"></p>
           </div>
           <div class="click-container">
             <div class="mirror-settings">
@@ -42,54 +43,52 @@ export default {
   },
   data () {
     return {
+        //heartRates: [],
         value: false,
-        text: ''
+        text: '',
+        checked: false
     }
   },
   watch: {
-            value(val) {
-                this.text = val ? 'Yes' : 'No'
-            }
+        value(val) {
+            this.text = val ? 'Yes' : 'No'
+        }
   },
   created() {
-    //this.socket = io("http://localhost:3000");
     this.socket = io("https://mirrorcontrol.herokuapp.com/");
-    //console.log(this.socket);
   },
   methods: {
     statusText() {
       // this.$refs.bpm.textContent = 'Searching...';
       console.log(this.value);
-      
-      if (this.value === false) {
+      //this.checked = false;
+      //console.log(this.checked);
       heartRateSensor.connect()
       .then(() => heartRateSensor.startNotificationsHeartRateMeasurement()
-      .then(this.value = true)
-      .then(this.handleHeartRateMeasurement)
+      .then(this.checked = true)
+      .then(handleHeartRateMeasurement)
+      .then(console.log(this.value))
       )
       .catch(error => {
-        this.value = false;
+        //this.$refs.bpm.textContent = 'oeps';
+        console.log('error');
+        this.checked = false;
+        console.log(this.checked);
+        //console.log(this.value);
       });
-      } else {
-        location.reload(true);
-        //heartRateSensor.onDisconnectButtonClick()
-        console.log ('disconnect');
-      }
     },
     handleHeartRateMeasurement(heartRateMeasurement) {
       //console.log('in functie handle');
-      
+      //this.$store.dispatch(handleHeartRateMeasurement);
+      //console.log(this.$store.state.heartRates);
       heartRateMeasurement.addEventListener('characteristicvaluechanged', event => {
-        if (this.$store.state.workoutDone != 'true') {
-          let heartRateMeasurement = heartRateSensor.parseHeartRate(event.target.value);
-          //this.$refs.bpm.innerHTML = heartRateMeasurement.heartRate + ' &#x2764;';
-          this.$store.state.heartRates.push(heartRateMeasurement.heartRate);
-          this.$store.dispatch('sendBluetoothSocket');
-          console.log(this.$store.state.heartRates);
-        }
+        let heartRateMeasurement = heartRateSensor.parseHeartRate(event.target.value);
+        this.$refs.bpm.innerHTML = heartRateMeasurement.heartRate + ' &#x2764;';
+        this.$store.state.heartRates.push(heartRateMeasurement.heartRate);
+        this.$store.dispatch('sendBluetoothSocket');
+        console.log(this.$store.state.heartRates);
       });
-      //this.$store.dispatch('sendBluetoothSocket');
-      }
+    }
   }
 }
 </script>  
@@ -140,21 +139,19 @@ export default {
   padding-top: 0.2rem;
 }
 
-
-.mirror-settings {
-  margin-left: 1rem;
-}
-
 .mirror-container {
   display: flex;
   justify-content:left;
 }
 
-
 .mirror-div-setting {
   padding-left: 1rem;
   padding-right: 5rem;
   text-align: left;
+}
+
+.mirror-settings {
+  margin-left: 1rem;
 }
 
 </style>
