@@ -68,34 +68,24 @@ export default {
       return timeInMinutes;  
     },
     currentBPM() {
-      //console.log(this.$store.state.heartRates[this.$store.state.heartRates.length -1])
-
       if (this.$store.state.heartRates[this.$store.state.heartRates.length - 1] == null) {
-        return []
+        return 45
       }
-      // if (this.$store.state.heartRates[this.$store.state.heartRates.length - 1].heartRates[this.$store.state.heartRates.length - 1] == null) {
-      //   return []
-      // }
-
-      //this.$store.state.heartRates[this.$store.state.heartRates.length -1].heartRates
-
-      //let currentBPM = this.$store.state.heartRates[this.$store.state.heartRates.length -1].heartRates[this.$store.state.heartRates[this.$store.state.heartRates.length -1].heartRates.length - 1]
       
-
-      
-      let currentBPM = this.$store.state.heartRates[this.$store.state.heartRates.length -1]
-
+      if (typeof(this.$store.state.heartRates[this.$store.state.heartRates.length - 1]) == 'object') {
+        return 'click to set heartratesensor'
+      }
+      let currentBPM = this.$store.state.heartRates[this.$store.state.heartRates.length - 1]
+      //console.log(currentBPM)
       
       return currentBPM
     }
   },
   methods: {
     play () {
-      //this.$refs.videoTraining.currentTime = this.$store.state.workouts[this.$route.params.id - 1].time - this.timeLeft;
-      //console.log('dit is huidig moment' + this.$refs.videoTraining.currentTime)
       this.$store.dispatch('playVideoSocket');
       this.$refs.videoTraining.play();
-      //console.log(this.$refs.videoTraining.duration)
+
     if (this.isPlaying === false) {
         this.isPlaying = true;
     } else {

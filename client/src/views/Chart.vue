@@ -1,7 +1,6 @@
 <template>
   <div class="charts">
     <h1 class="title">Statistics</h1>
-    <!-- <p>{{latestHeartRates}}</p> -->
     <li class="days-container" v-for='dayObject in doneDays' :key="dayObject.label">  
     </li>
     <h2 class="week-title">this week</h2>
@@ -25,7 +24,6 @@
 </template>
 
 <script>
-// import Trend from "vuetrend"
 import WeekDay from '../components/WeekDay.vue'
 import PureVueChart from 'pure-vue-chart';
 
@@ -34,14 +32,12 @@ let firstLoad = true
 export default {
   name: "jumps",
   components: {
-    // Trend,
     WeekDay,
     PureVueChart
   },
   data () {
     return {
       loading: 'getLoadingState',
-      //heartRates: []
     }
   },
   updated() {
@@ -55,11 +51,7 @@ export default {
     },
     latestHeartRates() {
       //console.log(this.$store.state.heartRates)
-      if (this.$store.state.heartRates[this.$store.state.heartRates.length - 1] === null) {
-        return []
-      }
-
-      if (this.$store.state.heartRates[this.$store.state.heartRates.length - 1] === undefined) {
+      if (this.$store.state.heartRates[this.$store.state.heartRates.length - 1] == null) {
         return []
       }
 
@@ -74,17 +66,6 @@ export default {
       }
 
       return heartRatesMain.heartRates.filter(Number)
-
-      /*
-      for(let i=0; i < this.$store.state.heartRates[this.$store.state.heartRates.length-1].heartRates.length; i++){
-        let currentHeartRate = this.$store.state.heartRates[this.$store.state.heartRates.length-1].heartRates[i];
-
-        if (typeof(currentHeartRate) == 'object') {
-          this.$store.state.heartRates[this.$store.state.heartRates.length-1].heartRates[i] = null
-        }
-      }
-
-      return this.$store.state.heartRates[this.$store.state.heartRates.length-1].heartRates.filter(Number)*/
     },
     adjustedWidth() {
       if (this.$store.state.heartRates[this.$store.state.heartRates.length - 1] == null) {
