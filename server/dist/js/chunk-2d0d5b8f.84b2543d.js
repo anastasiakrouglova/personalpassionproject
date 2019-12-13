@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0d5b8f"],{7e3:function(n,t,e){"use strict";e.r(t);var o=function(){var n=this,t=n.$createElement,e=n._self._c||t;return e("div",[e("p",[n._v("GOOD JOB!!")]),e("div",[e("button",{on:{click:function(t){return n.reloadPage()}}},[n._v("GO TO CHARTS")])])])},u=[],c={methods:{reloadPage:function(){this.$router.push("/chart",(function(){location.reload(!0)}))}}},r=c,a=e("2877"),i=Object(a["a"])(r,o,u,!1,null,null,null);t["default"]=i.exports}}]);
+//# sourceMappingURL=chunk-2d0d5b8f.84b2543d.js.map

@@ -1,8 +1,15 @@
 <template>
   <div class="pirouette">
+
     <h1 class="title">Workouts</h1>
     <Navigation/>
+    <!-- <transition 
+      :name="slideTransition"
+      mode="out-in"
+      @beforeLeave="beforeLeave"
+      @enter="enter" > -->
     <SingleWorkout msg="Pirouette" />
+    <!-- </transition> -->
   </div>
 </template>
 

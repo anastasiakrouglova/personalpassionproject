@@ -54,6 +54,7 @@ export default {
       return this.$store.state.stats;
     },
     latestHeartRates() {
+      //console.log(this.$store.state.heartRates)
       if (this.$store.state.heartRates[this.$store.state.heartRates.length - 1] === null) {
         return []
       }

@@ -1,9 +1,10 @@
 <template>
 <div>
     <p>GOOD JOB!!</p>
-    <div @click="reloadPage()">REFRESH</div>
-    <router-link to="/chart"><div>GA NAAR CHARTS</div></router-link>
-    
+    <div >
+    <button @click="reloadPage()">GO TO CHARTS</button>
+    <!-- <router-link  to="/chart"><div>GA NAAR CHARTS</div></router-link> -->
+    </div>
 </div>
 </template>
 
@@ -12,7 +13,10 @@
 export default {
     methods: {
         reloadPage() {
+            this.$router.push('/chart', () => {
             location.reload(true);
+            });
+            
         }
     }
 }

@@ -60,7 +60,6 @@ export default {
     statusText() {
       // this.$refs.bpm.textContent = 'Searching...';
       //console.log(this.value);
-      
       if (this.value === false) {
       heartRateSensor.connect()
       .then(() => heartRateSensor.startNotificationsHeartRateMeasurement()
@@ -78,7 +77,6 @@ export default {
     },
     handleHeartRateMeasurement(heartRateMeasurement) {
       //console.log('in functie handle');
-      
       heartRateMeasurement.addEventListener('characteristicvaluechanged', event => {
         if (this.$store.state.workoutDone != 'true') {
           let heartRateMeasurement = heartRateSensor.parseHeartRate(event.target.value);

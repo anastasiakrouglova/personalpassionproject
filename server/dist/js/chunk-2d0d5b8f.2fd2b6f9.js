@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0d5b8f"],{7e3:function(n,e,t){"use strict";t.r(e);var o=function(){var n=this,e=n.$createElement,t=n._self._c||e;return t("div",[t("p",[n._v("GOOD JOB!!")]),t("div",{on:{click:function(e){return n.reloadPage()}}},[n._v("REFRESH")]),t("router-link",{attrs:{to:"/chart"}},[t("div",[n._v("GA NAAR CHARTS")])])],1)},r=[],a={methods:{reloadPage:function(){location.reload(!0)}}},c=a,l=t("2877"),i=Object(l["a"])(c,o,r,!1,null,null,null);e["default"]=i.exports}}]);
-//# sourceMappingURL=chunk-2d0d5b8f.2fd2b6f9.js.map

@@ -17,15 +17,14 @@ html {
 }
 
 body {
-    width: 100%;
-    height: 100%;
+    width: 100vh;
+    height: 100vw;
     transform: rotate(90deg);
     display: flex;
     flex-direction: flex;
     flex-direction: column;
     align-items: center;
     overflow: hidden;
-
 }
 
 @font-face {
@@ -150,4 +149,9 @@ body {
       margin-top: 7rem;
       margin-bottom: -15rem;
       margin-left: -20rem;
+  }
+
+
+  .video {
+      padding-top: -10rem;
   }

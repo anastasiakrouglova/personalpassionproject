@@ -17,7 +17,7 @@
     </div>
     <div class="minutes-left">minutes left</div>
     <div class="time-left">{{ secondsToMinutes }}</div>
-    <p>{{this.$store.state.heartRates[this.$store.state.heartRates.length -1].heartRates}} BPM</p>
+    <p>{{currentBPM}} BPM</p>
     <div>
       <span  @click="play()"><PlayIcon  class="play-control-item play" v-show="!isPlaying" w="30" h="30"/></span>
       <span @click="pauze()"><PauseIcon class="play-control-item pauze" v-show="isPlaying" w="30" h="30"/></span>
@@ -30,6 +30,7 @@ import io from "socket.io-client";
 import PlayIcon from 'vue-ionicons/dist/md-play'
 import PauseIcon from 'vue-ionicons/dist/md-pause'
 import ArrowBackIcon from 'vue-ionicons/dist/md-arrow-back'
+import "../bluetooth/heartRateSensor.js"
 
 export default {
   name:'App',
@@ -52,6 +53,8 @@ export default {
       let minutes = Math.floor(this.timeLeft / 60);
       let seconds = this.timeLeft - minutes * 60;
 
+      let timeInMinutes = minutes + ':0' + seconds
+
       if (seconds < 10) {
         let timeInMinutes = minutes + ':0' + seconds
         return timeInMinutes;
@@ -63,6 +66,27 @@ export default {
       } 
 
       return timeInMinutes;  
+    },
+    currentBPM() {
+      //console.log(this.$store.state.heartRates[this.$store.state.heartRates.length -1])
+
+      if (this.$store.state.heartRates[this.$store.state.heartRates.length - 1] == null) {
+        return []
+      }
+      // if (this.$store.state.heartRates[this.$store.state.heartRates.length - 1].heartRates[this.$store.state.heartRates.length - 1] == null) {
+      //   return []
+      // }
+
+      //this.$store.state.heartRates[this.$store.state.heartRates.length -1].heartRates
+
+      //let currentBPM = this.$store.state.heartRates[this.$store.state.heartRates.length -1].heartRates[this.$store.state.heartRates[this.$store.state.heartRates.length -1].heartRates.length - 1]
+      
+
+      
+      let currentBPM = this.$store.state.heartRates[this.$store.state.heartRates.length -1]
+
+      
+      return currentBPM
     }
   },
   methods: {
@@ -79,7 +103,6 @@ export default {
     }
   },
   pauze () {
-    //console.log(this.$refs.videoTraining.duration);
     this.$store.dispatch('pauzeVideoSocket');
     this.$refs.videoTraining.pause();
     if (this.isPlaying === false) {
@@ -87,16 +110,13 @@ export default {
     } else {
       this.isPlaying = false;
     }
-    this.$store.state.workoutDone = 'true';
-    this.$store.dispatch('postWorkoutifDone')
-    this.$store.dispatch('postHeartRates')
-    this.$router.push('/transition');
-    
   },
   onPlayerEnded() {
     this.$store.state.workoutDone = 'true';
-    this.$store.dispatch('postWorkoutifDone')
-    this.$store.dispatch('postHeartRates')
+    this.$store.dispatch('postWorkoutifDone');
+    this.$store.dispatch('postHeartRates');
+    this.$store.dispatch('stopTrainingSocket');
+    this.$router.push('/transition');
     //this.$router.push('/chart');
     //this.$router.push('detail/' + this.$route.params.id + '/transition');
   },
