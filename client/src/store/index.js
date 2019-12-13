@@ -93,7 +93,7 @@ const store = new Vuex.Store({
         //this.$refs.bpm.innerHTML = heartRateMeasurement.heartRate + ' &#x2764;';
         this.state.heartRates.push(heartRateMeasurement.heartRate);
         //this.dispatch('sendBluetoothSocket');
-        console.log(this.state.heartRates);
+        //console.log(this.state.heartRates);
       });
     },
     loadWorkouts({ commit }) {
@@ -175,7 +175,7 @@ const store = new Vuex.Store({
       });
     },
     sendBluetoothSocket() {
-      console.log(this.state.heartRates);
+      //console.log(this.state.heartRates);
       let heartRateMeasurement = heartRateSensor.parseHeartRate(event.target.value);
       this.state.heartRates.push(heartRateMeasurement.heartRate);
       this.state.socket.emit('SEND_BLUETOOTH', {

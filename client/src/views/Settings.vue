@@ -59,7 +59,7 @@ export default {
   methods: {
     statusText() {
       // this.$refs.bpm.textContent = 'Searching...';
-      console.log(this.value);
+      //console.log(this.value);
       
       if (this.value === false) {
       heartRateSensor.connect()
@@ -73,7 +73,7 @@ export default {
       } else {
         location.reload(true);
         //heartRateSensor.onDisconnectButtonClick()
-        console.log ('disconnect');
+        //console.log ('disconnect');
       }
     },
     handleHeartRateMeasurement(heartRateMeasurement) {
@@ -85,7 +85,7 @@ export default {
           //this.$refs.bpm.innerHTML = heartRateMeasurement.heartRate + ' &#x2764;';
           this.$store.state.heartRates.push(heartRateMeasurement.heartRate);
           this.$store.dispatch('sendBluetoothSocket');
-          console.log(this.$store.state.heartRates);
+          //console.log(this.$store.state.heartRates);
         }
       });
       //this.$store.dispatch('sendBluetoothSocket');

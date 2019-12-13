@@ -60,20 +60,19 @@ export default {
   methods: {
     statusText() {
       // this.$refs.bpm.textContent = 'Searching...';
-      console.log(this.value);
+      //console.log(this.value);
       //this.checked = false;
       //console.log(this.checked);
       heartRateSensor.connect()
       .then(() => heartRateSensor.startNotificationsHeartRateMeasurement()
       .then(this.checked = true)
       .then(handleHeartRateMeasurement)
-      .then(console.log(this.value))
       )
       .catch(error => {
         //this.$refs.bpm.textContent = 'oeps';
-        console.log('error');
+        //console.log('error');
         this.checked = false;
-        console.log(this.checked);
+        //console.log(this.checked);
         //console.log(this.value);
       });
     },
@@ -86,7 +85,7 @@ export default {
         this.$refs.bpm.innerHTML = heartRateMeasurement.heartRate + ' &#x2764;';
         this.$store.state.heartRates.push(heartRateMeasurement.heartRate);
         this.$store.dispatch('sendBluetoothSocket');
-        console.log(this.$store.state.heartRates);
+        //console.log(this.$store.state.heartRates);
       });
     }
   }

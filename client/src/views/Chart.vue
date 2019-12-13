@@ -114,7 +114,7 @@ export default {
     iDay() {
     for (let n = 0; n<7; n++){
       this.$store.state.dayObjects[n].active = false;
-      console.log(this.$store.stats)
+      //console.log(this.$store.stats)
       for (let i = 0; i < this.$store.state.stats.length; i++) {
  
       if (this.$store.state.stats[i].week === '2'){

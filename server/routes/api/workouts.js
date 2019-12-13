@@ -35,6 +35,7 @@ async function loadWorkoutsCollection() {
     const client = await mongodb.MongoClient.connect('mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASS + '@smartmirror-tsmi5.mongodb.net/test?retryWrites=true&w=majority', {
         useNewUrlParser: true
     })
+
     
     return client.db('vue_express').collection('workouts');
 }
