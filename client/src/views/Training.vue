@@ -19,6 +19,7 @@
     <div class="time-left">{{ secondsToMinutes }}</div>
     <p>{{currentBPM}} BPM</p>
     <div>
+      <img src="/assets/img/button.svg" alt="button">
       <span  @click="play()"><PlayIcon  class="play-control-item play" v-show="!isPlaying" w="30" h="30"/></span>
       <span @click="pauze()"><PauseIcon class="play-control-item pauze" v-show="isPlaying" w="30" h="30"/></span>
     </div>
@@ -123,7 +124,9 @@ export default {
             //this.$store.state.workouts[this.$route.params.id - 1].time --
           } 
         }, 1000)
-    }  
+    }  else {
+      this.$router.push('/');
+    }
   }
 }
 }
@@ -160,6 +163,7 @@ export default {
   height: 4rem;
   width: 4rem;
   overflow-x: hidden;
+  border-radius: 50%;
 }
 
 .play {
@@ -175,6 +179,9 @@ export default {
   height: 4rem;
   width: 4rem;
   overflow-x: hidden;
+  border-radius: 50%;
+  position: relative;
+  margin-top: -9rem;
 }
 
 .play-control-item {
@@ -204,6 +211,7 @@ export default {
   font-size: 0.7rem;
   margin-top: -6.4rem;
   text-align: center;
+
 }
 .name-training {
   margin-top: 6rem;

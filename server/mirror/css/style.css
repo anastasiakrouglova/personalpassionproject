@@ -17,8 +17,8 @@ html {
 }
 
 body {
-    width: 100vh;
-    height: 100vw;
+    width: 100vw;
+    height: 100%;
     transform: rotate(90deg);
     display: flex;
     flex-direction: flex;
@@ -52,8 +52,6 @@ body {
 }
 
 
-
-
 #count {
     font-size: 30rem;
 }
@@ -62,7 +60,7 @@ body {
 #time {
     font-size: 2rem;
     margin-left: -55rem;
-    margin-top: -20rem;
+    margin-top: -26rem;
 } 
 
 #container {
@@ -70,6 +68,9 @@ body {
     font-family: Roboto;
     background-image: url(https://himalayasingh.github.io/audio-player-play-and-pause-animation-1/img/bg.gif);
     background-size: 25rem;
+    padding-bottom: 10rem;
+    padding-right: 10rem;
+    margin-left: 15rem;
     background-repeat: no-repeat;
     /* background-position: 50%;
     bottom: 60%; */
@@ -81,9 +82,10 @@ body {
     /* margin: 0 auto; */
     color: #fff;
     font-size: 3rem;
-    margin-top: 5rem;
-    margin-left: 9rem;
+    margin-top: 5.3rem;
+    margin-left: 11rem;
     overflow-x: visible;
+    text-align: center;
     cursor: default;
     /* padding: 1rem 0; */
     -webkit-user-select: none;
@@ -112,12 +114,13 @@ body {
 
 
   .fit-title {
-      font-size: 2.2rem;
+      font-size: 2.7rem;
       background-color: white;
       color: black;
       padding: 0.2rem 1rem;
       font-weight: bold;
-      margin-top: -11rem;
+      margin-top: -20rem;
+      margin-left: 17rem;
   }
 
 
@@ -141,17 +144,26 @@ body {
     font-weight: bold;
 }
 
-
   .link-container {
       display: flex;
       flex-direction: column;
       justify-content: left;
       margin-top: 7rem;
       margin-bottom: -15rem;
-      margin-left: -20rem;
+      margin-left: -25rem;
+  }
+
+  .video {
+      margin-top: -40rem;
+      margin-left: 13rem;
+  }
+
+  .logo-video {
+      margin-left: 17rem;
+      margin-top: -10rem;
   }
 
 
-  .video {
-      padding-top: -10rem;
+  .aftel-container {
+      margin-top: 7rem
   }

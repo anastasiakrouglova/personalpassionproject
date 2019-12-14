@@ -4,6 +4,7 @@
     <div >
     <button @click="reloadPage()">GO TO CHARTS</button>
     <!-- <router-link  to="/chart"><div>GA NAAR CHARTS</div></router-link> -->
+    <img src="/assets/img/done.gif" alt="good job">
     </div>
 </div>
 </template>
