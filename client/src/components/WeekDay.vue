@@ -33,7 +33,7 @@ export default {
   display: flex;
   flex-direction: column-reverse;
   width: 2rem;
-  padding: 1rem;
+  padding: 0.4rem;
   opacity: 0.6;
 }
 
@@ -41,7 +41,7 @@ export default {
   display: flex;
   flex-direction: column-reverse;
   width: 2rem;
-  padding: 1rem;
+  padding: 0.4rem;
   font-weight: bolder;
   opacity: 1;
 }

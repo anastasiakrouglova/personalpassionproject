@@ -4,21 +4,27 @@
     <Connected/>
     <li class="days-container" v-for='dayObject in doneDays' :key="dayObject.label">  
     </li>
-    <h2 class="week-title">this week</h2>
-    <div class="week-container">
-        <div v-for="dayObject in this.$store.state.dayObjects" :key="dayObject.label">
-          <WeekDay :dayObject="dayObject" />
-      </div >
-    </div>
+    <div class="chart-container">
+      <h2 class="week-title">This week</h2>
+      <div class="week-container">
+          <div v-for="dayObject in this.$store.state.dayObjects" :key="dayObject.label">
+            <WeekDay :dayObject="dayObject" />
+        </div >
+      </div>
 
-    <h2 class="week-title">BPM of your last workout</h2>
-    <div class="chart-heart">
-      <pure-vue-chart 
-      :points="latestHeartRates"
-      :width="adjustedWidth"
-      :height="150"
-      :show-y-axis="true"
-      />
+      <h2 class="week-title bpm-title">Bpm of your last workout</h2>
+      <div class="chart-heart" >
+        <pure-vue-chart v-if="latestHeartRates[2] > 0"
+        :points="latestHeartRates"
+        :width="adjustedWidth"
+        :height="150"
+        :show-y-axis="true"
+        />
+        <div v-else> 
+          <img  src="/assets/img/noHeartbeat.svg" alt="">
+          <p class="noheartbeat-text">no heartbeat found</p>
+        </div>
+      </div>
     </div>
   </div>
   
@@ -137,7 +143,8 @@ export default {
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
+  justify-content: center;
   /* font-weight: bold; */
 }
 
@@ -147,10 +154,12 @@ export default {
   margin-bottom: 0rem;
   text-align: left;
   padding-left: 1rem;
+  margin-top: 2rem;
 }
 
 .week-img {
-  padding-bottom: 0.1rem;
+  padding-bottom: 0.2rem;
+  padding:
 }
 
 
@@ -159,4 +168,20 @@ export default {
   padding: 1rem;
 }
 
+.noheartbeat-text {
+  margin-top: 0rem;
+  font-size: 0.8rem;
+}
+
+.chart-container {
+  max-width: 40rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.bpm-title {
+  margin-top: 3rem;
+}
 </style>

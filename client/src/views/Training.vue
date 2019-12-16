@@ -155,7 +155,7 @@ export default {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin-top: 2.4rem;
+  margin-top: 2.7rem;
 }
 
 .pauze {
@@ -220,7 +220,7 @@ export default {
 
 }
 .name-training {
-  margin-top: 6rem;
+  margin-top: 3rem;
   margin-bottom: 3rem;
   font-weight: bold;
 }
