@@ -21,7 +21,7 @@
         :show-y-axis="true"
         />
         <div v-else> 
-          <img  src="/assets/img/noHeartbeat.svg" alt="">
+          <img  src="/assets/img/noHeartbeat.svg"  class="noheartbeat" alt="">
           <p class="noheartbeat-text">no heartbeat found</p>
         </div>
       </div>
@@ -183,5 +183,10 @@ export default {
 
 .bpm-title {
   margin-top: 3rem;
+}
+
+.noheartbeat{
+  width: 100%;
+
 }
 </style>
