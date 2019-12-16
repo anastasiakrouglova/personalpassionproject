@@ -72,3 +72,6 @@ app.use('/api/stats', (req, res, next) => {
 app.use('/api/heartRates', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
 });
+
+
+app.get('/*', (req, res) => res.send('Index Page'));
