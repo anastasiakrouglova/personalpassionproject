@@ -1,7 +1,7 @@
 <template>
   <div class="training-container">
-    <router-link class="arrowback" to="/"><ArrowBackIcon class="arrowback-training" w="30" h="30" /></router-link>
-
+    <h1 class="title">Workout</h1>
+    <Connected/>
     <h2 class="name-training">{{this.$store.state.workouts[$route.params.id - 1].title}} </h2>
     <video muted class="video-workout" ref="videoTraining" @ended="onPlayerEnded()"  @canplay="onPlayerStarted()" autoplay :src="'/assets/video/' + this.$store.state.workouts[$route.params.id - 1].img + '.mp4'" width=100></video>
     <div @click="false" @drag="false">
@@ -17,11 +17,11 @@
     </div>
     <div class="minutes-left">minutes left</div>
     <div class="time-left">{{ secondsToMinutes }}</div>
-    <p>{{currentBPM}} BPM</p>
-    <div>
-      <img src="/assets/img/button.svg" alt="button">
-      <span  @click="play()"><PlayIcon  class="play-control-item play" v-show="!isPlaying" w="30" h="30"/></span>
-      <span @click="pauze()"><PauseIcon class="play-control-item pauze" v-show="isPlaying" w="30" h="30"/></span>
+    <p class="bpm-training">{{currentBPM}}</p>
+    <div class="play-container">
+      <img src="/assets/img/button.svg" width="80" alt="button">
+      <span  @click="play()"><PlayIcon  class="play-control-item play" v-show="!isPlaying" w="25" h="25"/></span>
+      <span @click="pauze()"><PauseIcon class="play-control-item pauze" v-show="isPlaying" w="25" h="25"/></span>
     </div>
   </div>
 </template>
@@ -30,13 +30,13 @@
 import io from "socket.io-client";
 import PlayIcon from 'vue-ionicons/dist/md-play'
 import PauseIcon from 'vue-ionicons/dist/md-pause'
-import ArrowBackIcon from 'vue-ionicons/dist/md-arrow-back'
 import "../bluetooth/heartRateSensor.js"
+import Connected from "@/components/Connected.vue"
 
 export default {
   name:'App',
   components: {
-    PlayIcon, PauseIcon, ArrowBackIcon
+    PlayIcon, PauseIcon, Connected
   },
   data () {
     return {
@@ -54,7 +54,7 @@ export default {
       let minutes = Math.floor(this.timeLeft / 60);
       let seconds = this.timeLeft - minutes * 60;
 
-      let timeInMinutes = minutes + ':0' + seconds
+      let timeInMinutes = minutes + ':' + seconds
 
       if (seconds < 10) {
         let timeInMinutes = minutes + ':0' + seconds
@@ -74,12 +74,12 @@ export default {
       }
       
       if (typeof(this.$store.state.heartRates[this.$store.state.heartRates.length - 1]) == 'object') {
-        return 'click to set heartratesensor'
+        return ''
       }
       let currentBPM = this.$store.state.heartRates[this.$store.state.heartRates.length - 1]
       //console.log(currentBPM)
       
-      return currentBPM
+      return currentBPM + 'BPM'
     }
   },
   methods: {
@@ -135,7 +135,7 @@ export default {
 <style>
 
 .arrowback-training {
-  fill: white;
+  fill: black;
   text-align: left;
   padding-left: 2rem;
   padding-top: 2rem;
@@ -150,38 +150,44 @@ export default {
   position: absolute;
 }
 
-.pauze {
-  /* background-image: url(https://himalayasingh.github.io/audio-player-play-and-pause-animation-1/img/bg.gif); */
-  background-color: #3E74B8;
-  background-size: 13rem;
-  background-repeat: no-repeat;
-  background-position-x: 50%;
-  background-position-y: 0rem;
-  margin: -1rem;
-  padding: 2.6rem 1rem 0rem 1rem;
-  color: white;
-  height: 4rem;
-  width: 4rem;
-  overflow-x: hidden;
-  border-radius: 50%;
+.play-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2.4rem;
 }
 
-.play {
-  /* background-image: url(https://himalayasingh.github.io/audio-player-play-and-pause-animation-1/img/f1.gif); */
-  background-color: #3E74B8;
+.pauze {
+  /* background-image: url(https://himalayasingh.github.io/audio-player-play-and-pause-animation-1/img/bg.gif); */
   background-size: 13rem;
   background-repeat: no-repeat;
   background-position-x: 50%;
   background-position-y: -1rem;
-  margin: 0rem;
-  padding: 1.6rem 1rem 0rem 1rem;
+  padding: 1rem 1rem 0rem 1rem;
   color: white;
-  height: 4rem;
-  width: 4rem;
+  height: 3rem;
+  width: 3rem;
   overflow-x: hidden;
   border-radius: 50%;
   position: relative;
-  margin-top: -9rem;
+  margin-top: -4.3rem;
+}
+
+.play {
+  /* background-image: url(https://himalayasingh.github.io/audio-player-play-and-pause-animation-1/img/f1.gif); */
+  background-size: 13rem;
+  background-repeat: no-repeat;
+  background-position-x: 50%;
+  background-position-y: -1rem;
+  padding: 1rem 1rem 0rem 1rem;
+  color: white;
+  height: 3rem;
+  width: 3rem;
+  overflow-x: hidden;
+  border-radius: 50%;
+  position: relative;
+  margin-top: -4.3rem;
 }
 
 .play-control-item {
@@ -218,4 +224,10 @@ export default {
   margin-bottom: 3rem;
   font-weight: bold;
 }
+
+.bpm-training {
+  color: #3E74B8;
+  margin-top: -4.2rem;
+}
+
 </style>

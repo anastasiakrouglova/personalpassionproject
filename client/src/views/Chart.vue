@@ -1,6 +1,7 @@
 <template>
   <div class="charts">
     <h1 class="title">Statistics</h1>
+    <Connected/>
     <li class="days-container" v-for='dayObject in doneDays' :key="dayObject.label">  
     </li>
     <h2 class="week-title">this week</h2>
@@ -26,6 +27,7 @@
 <script>
 import WeekDay from '../components/WeekDay.vue'
 import PureVueChart from 'pure-vue-chart';
+import Connected from "@/components/Connected.vue"
 
 let firstLoad = true
 
@@ -33,7 +35,7 @@ export default {
   name: "jumps",
   components: {
     WeekDay,
-    PureVueChart
+    PureVueChart, Connected
   },
   data () {
     return {

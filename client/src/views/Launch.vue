@@ -73,6 +73,7 @@ methods: {
 
   .text {
       margin-bottom: 4rem;
+      padding: 0rem 1rem;
   }
 
   .img-connection {

@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1 class="title">Settings</h1>
-        
+        <Connected/>
         <div id="container">
           <div class="click-container" @click="statusText()" @click.native="statusText()">
             <app-switch class="checkbox-settings" v-model="value" unchecked>
@@ -33,12 +33,13 @@
 
 <script>
 import Switch from '../components/Switch'
+import Connected from "@/components/Connected.vue"
 
 import io from "socket.io-client";
 export default {
   name: "jumps",
   components: {
-    'app-switch': Switch
+    'app-switch': Switch, Connected
   },
   data () {
     return {
