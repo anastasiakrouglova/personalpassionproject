@@ -24,7 +24,7 @@
         </div>       
       </div>
       <h1> {{this.$store.state.workouts[$route.params.id - 1].title}}</h1>
-      <p class="info-text">In kunstschaatsen is het zeer belangrijk om goed op je landing te letten. Hoe gecontrolleerder en sterker, hoe meer punten je zult krijgen van de jury. Deze workout is daarom dus een harde training om je been en buikspieren te versterken.</p>
+      <p class="info-text">{{this.$store.state.workouts[$route.params.id - 1].text}}</p>
     </div>
   </div>
 </template>
@@ -131,7 +131,7 @@ export default {
   }
 
 .info-text {
-  padding: 0rem 1rem 7rem 1rem;
+  padding: 0rem 1rem 8rem 1rem;
   margin-bottom: -7rem;
 }
 
