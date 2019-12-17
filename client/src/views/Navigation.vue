@@ -1,16 +1,29 @@
 <template>
   <div>
+    <h1 class="title">Workouts</h1>
+    <Connected/>
     <nav class="navigation">
       <router-link to="/">Jumps</router-link>
       <router-link to="/pirouette">Pirouettes</router-link>
       <router-link to="/stretch">Stretch</router-link>
     </nav>
-      <router-view/>
   </div>
 </template>
 
-<style>
+<script>
+// @ is an alias to /src     <img alt="Vue logo" src="../assets/logo.png" />
+import { mapActions } from 'vuex'
+import Connected from "@/components/Connected.vue"
 
+export default {
+  name: "navigation",
+  components: {
+    Connected
+  },
+};
+</script>
+
+<style>
 .navigation {
   padding: 2rem 0 3rem;
 }

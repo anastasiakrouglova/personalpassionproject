@@ -1,14 +1,15 @@
 <template>
   <div id="app">
-      <!-- <transition
+      <Navigation v-if="this.$router.history.current.path == '/' || this.$router.history.current.path == '/pirouette' || this.$router.history.current.path == '/stretch'"/>
+      <transition
         :name="slideTransition"
         mode="out-in"
         @beforeLeave="beforeLeave"
         @enter="enter"
         @afterEnter="afterEnter"
-      > -->
+      >
     <router-view class="router-container" />
-    <!-- </transition> -->
+    </transition>
     <Tabs class="tabs-container"/>
   </div>
 </template>
@@ -18,11 +19,13 @@ const DEFAULT_TRANSITION = 'fade';
 
 import {mapState} from 'vuex'
 import Tabs from "@/views/Tabs.vue";
+import Navigation from "@/views/Navigation.vue"
 
 export default {
   name: 'app',
   components: {
-    Tabs
+    Tabs, 
+    Navigation
   },
   data() {
     return {
@@ -36,14 +39,12 @@ export default {
       if (slideTransition === 'slide') {
         const toDepth = to.path.split('/').length;
         const toStretch = to.path
-        //console.log(toStretch);
-
+        if (this.$router.history.current.path === '/stretch') {
+          slideTransition = toStretch ? 'slide-right' : 'slide-left';
+        } 
+        else {
         slideTransition = toStretch === '/pirouette' || toStretch === '/stretch' ? 'slide-left' : 'slide-right';
-        //console.log(slideTransition);
-        // console.log(toDepth);
-        // const fromDepth = from.path.split('/').length;
-        // console.log(fromDepth);
-        // slideTransition = toDepth < fromDepth ? 'slide-right' : 'slide-left';
+        }
       }
 
       this.slideTransition = slideTransition || DEFAULT_TRANSITION;
@@ -91,12 +92,6 @@ export default {
 
         return socketClass
       }
-            // let spanClass = "weekday-container";
-            // if (this.dayObject.index === this.todayNumber -1) {
-            //     spanClass += " weekday-currentday"
-            // }
-            // return spanClass;
-      //console.log(socketConnected)
 
       return socketClass
     }
