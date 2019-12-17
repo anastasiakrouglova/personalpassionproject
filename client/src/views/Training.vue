@@ -79,7 +79,7 @@ export default {
       let currentBPM = this.$store.state.heartRates[this.$store.state.heartRates.length - 1]
       //console.log(currentBPM)
       
-      return currentBPM + 'BPM'
+      return currentBPM + ' BPM'
     }
   },
   methods: {

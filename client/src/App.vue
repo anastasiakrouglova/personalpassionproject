@@ -80,12 +80,6 @@ export default {
       'socketConnected'
     ]),
     connectedClass() {
-      // if (socketConnected) {
-      //   let socketConnectedd = this.socketConnected
-      //   console.log("lalalalla")
-
-      //   return socketConnectedd
-      // }
       let socketClass = "socket-true"
       if (this.socketConnected === false) {
         socketClass += " socket-false"
@@ -120,7 +114,7 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition-duration: 0.2s;
+  transition-duration: 0s;
   transition-property: height, opacity;
   transition-timing-function: ease;
   overflow: hidden;

@@ -4,7 +4,7 @@
     <Connected/>
     <li class="days-container" v-for='dayObject in doneDays' :key="dayObject.label">  
     </li>
-    <div class="chart-container">
+    <div >
       <h2 class="week-title">This week</h2>
       <div class="week-container">
           <div v-for="dayObject in this.$store.state.dayObjects" :key="dayObject.label">

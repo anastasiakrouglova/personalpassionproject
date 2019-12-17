@@ -59,8 +59,8 @@ position: relative;
     position: absolute;
     font-size: 2.5rem;
     color: black;
-    top: 0.2rem;
+    top: 0rem;
     text-align: center;
-    left: 0.65rem;
+    left: 0.45rem;
 }
 </style>
